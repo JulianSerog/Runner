@@ -20,7 +20,7 @@ class ESPlayer: SKSpriteNode {
     init() {
         super.init(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(32, 44))
         //body
-        body = SKSpriteNode(color: UIColor.blackColor(), size: CGSizeMake(self.frame.size.width, 40))
+        body = SKSpriteNode(color: UIColor.blueColor(), size: CGSizeMake(self.frame.size.width, 40))
         body.position = CGPointMake(0, 2)
         
         
@@ -28,14 +28,20 @@ class ESPlayer: SKSpriteNode {
         let skinColor = UIColor(red: 1.0, green: 0.8, blue: 0.7, alpha: 1.0)
         let face = SKSpriteNode(color: skinColor, size: CGSizeMake(self.frame.size.width, 12))
         face.position = CGPointMake(0, 6)
+        //create hat
+        let hat = SKSpriteNode(color: UIColor.blackColor(), size: CGSizeMake(self.frame.size.width+8, 8))
+        hat.position = CGPointMake(4,10)
         
+        let hatTop = SKSpriteNode(color: UIColor.blackColor(), size: CGSizeMake(self.frame.size.width/4+10, 4))
+        hatTop.position = CGPointMake(-11,6)
+        hat.addChild(hatTop)
         
         let eyeColor = UIColor.whiteColor()
         let leftEye = SKSpriteNode(color: eyeColor, size: CGSizeMake(6,6))
         let rightEye = leftEye.copy() as! SKSpriteNode
         let pupil = SKSpriteNode(color: UIColor.blackColor(), size: CGSizeMake(3, 3))
         
-        pupil.position = CGPointMake(2, 0)
+        pupil.position = CGPointMake(4, 0)
         leftEye.addChild(pupil)
         leftEye.position = CGPointMake(-4, 0)
         rightEye.position = CGPointMake(14, 0)
@@ -51,6 +57,7 @@ class ESPlayer: SKSpriteNode {
         addChild(body)
         body.addChild(face)
         rightEye.addChild(pupil.copy() as! SKSpriteNode)
+        face.addChild(hat)
         face.addChild(leftEye)
         face.addChild(rightEye)
         body.addChild(mouth)
