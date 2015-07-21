@@ -15,8 +15,17 @@ class GameScene: SKScene {
     var player: ESPlayer!
     var backgroundMusicPlayer : AVAudioPlayer!
     
+    //starting message
+    var label = UILabel(frame: CGRectMake(0, 0, 200, 21))
+    
+    
+    
+    
+    
+    //counter for num of touches
     var counter = 0
     
+    //background music method
     func playBackgroundMusic(filename: String)
     {
         let url = NSBundle.mainBundle().URLForResource(filename, withExtension: nil)
@@ -37,12 +46,25 @@ class GameScene: SKScene {
         backgroundMusicPlayer.numberOfLoops = -1
         backgroundMusicPlayer.prepareToPlay()
         backgroundMusicPlayer.play()
-        
     }//playBackgroundMusic
     
+    
+    
+    
+    
+    
+    //Starting screen
     override func didMoveToView(view: SKView)
     {
-        /* Setup your scene here */
+        label.center = CGPointMake(frame.width/2, frame.height/2)
+        label.text = "Touch the screen to play!"
+        
+        //try changing the font
+        //label.font = UIFont(name: "cursive", size: 8)
+        //print("couldn't find font!")
+    
+        self.view?.addSubview(label)
+        
         
         playBackgroundMusic("bg_music.mp3")
         
@@ -51,7 +73,7 @@ class GameScene: SKScene {
         movingGround = ESMovingGround(size: CGSizeMake(view.frame.width, 20))
         //set the position of the ground
         //set to 0 for ground or frame.height/2 for middle of screen
-        movingGround.position = CGPointMake(0, 0 /* view.frame/2 */)
+        movingGround.position = CGPointMake(0, 0)
         //add the ground to the scene
         addChild(movingGround)
         
@@ -62,21 +84,34 @@ class GameScene: SKScene {
         addChild(player)
         player.breathe()
         
-        
     }//didMoveToView
     
     
     
+    
+    
+    
+    
+    
+    //when touches begin
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         /* Called when a touch begins */
+        
         counter++
         if counter == 1{
             player.stop()
             movingGround.start()
             player.startRunning()
+            label.hidden = true
         }//if
         if counter > 1 {
             player.stop()
+        }
+        //TEMPORARY ---- this is a placeholder until I add a jump, and collide mechanism with bricks
+        if counter == 3
+        {
+            backgroundMusicPlayer.stop()
+            playBackgroundMusic("game_over.mp3")
         }
         
      
