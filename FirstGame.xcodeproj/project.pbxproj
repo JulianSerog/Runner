@@ -19,6 +19,7 @@
 		9E8AB4961B1E92A500DFF844 /* torpedo.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9E8AB4941B1E92A500DFF844 /* torpedo.mp3 */; };
 		9E8AB4981B1EA12900DFF844 /* ESMovingGround.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8AB4971B1EA12900DFF844 /* ESMovingGround.swift */; };
 		9E8AB49A1B1EB71100DFF844 /* ESPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8AB4991B1EB71100DFF844 /* ESPlayer.swift */; };
+		9EE3BBDF1B5E013B0065C962 /* bg_music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9EE3BBDE1B5E013B0065C962 /* bg_music.mp3 */; };
 		9EFD080B1B210BFE003E269C /* man.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EFD080A1B210BFE003E269C /* man.png */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,7 @@
 		9E8AB4941B1E92A500DFF844 /* torpedo.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = torpedo.mp3; sourceTree = "<group>"; };
 		9E8AB4971B1EA12900DFF844 /* ESMovingGround.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESMovingGround.swift; sourceTree = "<group>"; };
 		9E8AB4991B1EB71100DFF844 /* ESPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESPlayer.swift; sourceTree = "<group>"; };
+		9EE3BBDE1B5E013B0065C962 /* bg_music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bg_music.mp3; sourceTree = "<group>"; };
 		9EFD080A1B210BFE003E269C /* man.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = man.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -98,6 +100,7 @@
 				9E8AB4971B1EA12900DFF844 /* ESMovingGround.swift */,
 				9E8AB46D1B1E8F5300DFF844 /* GameViewController.swift */,
 				9E8AB46F1B1E8F5300DFF844 /* Main.storyboard */,
+				9EE3BBDE1B5E013B0065C962 /* bg_music.mp3 */,
 				9E8AB4921B1E927900DFF844 /* sounds */,
 				9E8AB48B1B1E917200DFF844 /* img */,
 				9E8AB4721B1E8F5300DFF844 /* Images.xcassets */,
@@ -235,6 +238,7 @@
 				9E8AB4761B1E8F5300DFF844 /* LaunchScreen.xib in Resources */,
 				9E8AB4951B1E92A500DFF844 /* bgmusic.mp3 in Resources */,
 				9EFD080B1B210BFE003E269C /* man.png in Resources */,
+				9EE3BBDF1B5E013B0065C962 /* bg_music.mp3 in Resources */,
 				9E8AB4731B1E8F5300DFF844 /* Images.xcassets in Resources */,
 				9E8AB46A1B1E8F5300DFF844 /* GameScene.sks in Resources */,
 				9E8AB4961B1E92A500DFF844 /* torpedo.mp3 in Resources */,

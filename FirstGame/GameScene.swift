@@ -7,17 +7,44 @@
 //
 
 import SpriteKit
+import AVFoundation
 
 class GameScene: SKScene {
     
     var movingGround: ESMovingGround!
     var player: ESPlayer!
+    var backgroundMusicPlayer : AVAudioPlayer!
     
     var counter = 0
+    
+    func playBackgroundMusic(filename: String)
+    {
+        let url = NSBundle.mainBundle().URLForResource(filename, withExtension: nil)
+        if(url == nil)
+        {
+            print("Could not find file: \(filename)")
+            return
+        }//if
+        
+        
+        //below is an example of the new try catch in swift 2!
+        do {
+        try backgroundMusicPlayer = AVAudioPlayer(contentsOfURL: url!)
+        } catch {
+            print("Could not create audio player")
+        }//catch
+        
+        backgroundMusicPlayer.numberOfLoops = -1
+        backgroundMusicPlayer.prepareToPlay()
+        backgroundMusicPlayer.play()
+        
+    }//playBackgroundMusic
     
     override func didMoveToView(view: SKView)
     {
         /* Setup your scene here */
+        
+        playBackgroundMusic("bg_music.mp3")
         
         backgroundColor = UIColor(red: 159.0/255.0, green: 201.0/255.0, blue: 244.0/255.0, alpha: 1.0)
         
