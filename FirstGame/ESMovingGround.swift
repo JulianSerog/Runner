@@ -38,6 +38,15 @@ class ESMovingGround: SKSpriteNode
                 segmentColor = COLOR_TWO
             }//else
             
+            
+            
+            
+            
+            
+            
+            
+            
+            
             let segment = SKSpriteNode(color:segmentColor, size: CGSizeMake(self.size.width / CGFloat(NUMBER_OF_SEGMENTS), self.size.height ))
             segment.anchorPoint = CGPointMake(0.0, 0)
             segment.position = CGPointMake(CGFloat(i)*segment.size.width, 0)

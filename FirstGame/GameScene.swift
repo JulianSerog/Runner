@@ -9,15 +9,25 @@
 import SpriteKit
 import AVFoundation
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var movingGround: ESMovingGround!
     var player: ESPlayer!
     var backgroundMusicPlayer : AVAudioPlayer!
+    var PLAYER_STARTING_HEIGHT : CGPoint!
     
     //starting message
     var label = UILabel(frame: CGRectMake(0, 0, 200, 21))
     
+    
+    //enums
+    enum BodyType: UInt32 {
+        case ESPlayer = 1
+        case ESMovingGround = 2
+        case anotherBody1 = 4
+        case anotherBody2 = 8
+        case anotherBody3 = 16
+    }
     
     
     
@@ -56,35 +66,63 @@ class GameScene: SKScene {
     //Starting screen
     override func didMoveToView(view: SKView)
     {
+        //show physics
+        view.showsPhysics = true
+        
+        
         label.center = CGPointMake(frame.width/2, frame.height/2)
         label.text = "Touch the screen to play!"
         
         //try changing the font
         //label.font = UIFont(name: "cursive", size: 8)
         //print("couldn't find font!")
-    
-        self.view?.addSubview(label)
         
-        
+        //play background music
         playBackgroundMusic("bg_music.mp3")
         
-        backgroundColor = UIColor(red: 159.0/255.0, green: 201.0/255.0, blue: 244.0/255.0, alpha: 1.0)
         
+        
+        
+        //create background
+        backgroundColor = UIColor(red: 159.0/255.0, green: 201.0/255.0, blue: 244.0/255.0, alpha: 1.0)
         movingGround = ESMovingGround(size: CGSizeMake(view.frame.width, 20))
         //set the position of the ground
         //set to 0 for ground or frame.height/2 for middle of screen
         movingGround.position = CGPointMake(0, 0)
-        //add the ground to the scene
-        addChild(movingGround)
         
         
+        
+        
+        //create and position the player right above the ground
         player = ESPlayer()
-        //positions the player right above the ground
         player.position = CGPointMake(70, movingGround.position.y + movingGround.frame.size.height + player.frame.size.height/2)
-        addChild(player)
+        PLAYER_STARTING_HEIGHT = player.position
         player.breathe()
         
+        
+
+        
+        
+        //add the objects to the scene
+        addChild(movingGround)
+        self.view?.addSubview(label)
+        addChild(player)
+
+        
     }//didMoveToView
+    
+    
+    
+    
+    func didBeginContact(contact: SKPhysicsContact)
+    {
+        //called automatically when two objects begin contact with each other
+    }//didBeginContact
+    
+    func didEndContact(contact: SKPhysicsContact)
+    {
+        //gets called automatically when two objects end contact
+    }//didEndContact
     
     
     
@@ -97,16 +135,35 @@ class GameScene: SKScene {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         /* Called when a touch begins */
         
+        
+        //increment touch counter every time screen is touched
         counter++
+        //things to do on first touch
         if counter == 1{
             player.stop()
             movingGround.start()
             player.startRunning()
             label.hidden = true
         }//if
-        if counter > 1 {
-            player.stop()
+        
+        
+        
+        
+        
+        
+        if counter > 1
+        {
+            print("Player starting height: \(PLAYER_STARTING_HEIGHT)")
+            if ((player.position.y > PLAYER_STARTING_HEIGHT.y - 0.02) && (player.position.y < PLAYER_STARTING_HEIGHT.y + 0.02))
+            {
+                //player.stop()
+                player.jump((view?.frame.height)!/2)
+                //player.startRunning()
+                
+            }//if player is at initial height
+            print("Player Height now: \(player.position)")
         }
+        
         //TEMPORARY ---- this is a placeholder until I add a jump, and collide mechanism with bricks
         if counter == 3
         {

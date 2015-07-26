@@ -15,6 +15,7 @@ class ESPlayer: SKSpriteNode {
     var arm: SKSpriteNode!
     var leftFoot: SKSpriteNode!
     var rightFoot: SKSpriteNode!
+    let JUMP_SPEED = 5
     //override?
 
     init() {
@@ -120,7 +121,14 @@ class ESPlayer: SKSpriteNode {
     }
     
     
-    func jump() {
+    func jump(var1: CGFloat)
+    {
+        //add if statement for jump checking in the start touches method
+        let moveUp = SKAction.moveByX(0, y: var1, duration: 0.35);
+        let moveDown = SKAction.moveByX(0, y: -1 * var1, duration: 0.175);
+        let jumpSequence = SKAction.sequence([moveUp, moveDown])
+        self.runAction(jumpSequence)
+        print("Player jumped")
         
     }//jump
     
