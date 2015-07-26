@@ -156,6 +156,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             print("Player starting height: \(PLAYER_STARTING_HEIGHT)")
             if ((player.position.y > PLAYER_STARTING_HEIGHT.y - 0.02) && (player.position.y < PLAYER_STARTING_HEIGHT.y + 0.02))
             {
+                //commented out b/c it's causing some strange issues with player's feet flying up
                 //player.stop()
                 player.jump((view?.frame.height)!/2)
                 //player.startRunning()
