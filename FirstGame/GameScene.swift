@@ -14,22 +14,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var movingGround: ESMovingGround!
     var player: ESPlayer!
     var backgroundMusicPlayer : AVAudioPlayer!
-    var PLAYER_STARTING_HEIGHT : CGPoint!
+    var PLAYER_STARTING_POINT : CGPoint!
+    var isStarted = false
     
     //starting message
-    var label = UILabel(frame: CGRectMake(0, 0, 200, 21))
-    
-    
-    //enums
-    enum BodyType: UInt32 {
-        case ESPlayer = 1
-        case ESMovingGround = 2
-        case anotherBody1 = 4
-        case anotherBody2 = 8
-        case anotherBody3 = 16
-    }
-    
-    
+    let label = SKLabelNode(text: "Tap the screen to start!")
     
     
     //counter for num of touches
@@ -48,7 +37,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //below is an example of the new try catch in swift 2!
         do {
-        try backgroundMusicPlayer = AVAudioPlayer(contentsOfURL: url!)
+            try backgroundMusicPlayer = AVAudioPlayer(contentsOfURL: url!)
         } catch {
             print("Could not create audio player")
         }//catch
@@ -60,22 +49,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     
+    //function that returns an SKAction
+    func blinkAnimation() -> SKAction
+    {
+        let duration  = 0.6
+        let fadeOut = SKAction.fadeAlphaTo(0.0, duration: duration)
+        let fadeIn = SKAction.fadeAlphaTo(1.0, duration: duration)
+        let blink = SKAction.sequence([fadeOut, fadeIn])
+        return SKAction.repeatActionForever(blink)
+    }
     
     
     
     //Starting screen
     override func didMoveToView(view: SKView)
     {
-        //show physics
-        view.showsPhysics = true
+        
+        //label stuff
+        label.position.x = view.center.x
+        label.position.y = view.center.y
+        label.fontName = "TimesNewRomanPS-BoldItalicMT"
+        label.fontColor = UIColor.blackColor()
+        label.runAction(blinkAnimation()) //runs the blink animation forever
         
         
-        label.center = CGPointMake(frame.width/2, frame.height/2)
-        label.text = "Touch the screen to play!"
-        
-        //try changing the font
-        //label.font = UIFont(name: "cursive", size: 8)
-        //print("couldn't find font!")
         
         //play background music
         playBackgroundMusic("bg_music.mp3")
@@ -96,33 +93,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //create and position the player right above the ground
         player = ESPlayer()
         player.position = CGPointMake(70, movingGround.position.y + movingGround.frame.size.height + player.frame.size.height/2)
-        PLAYER_STARTING_HEIGHT = player.position
+        PLAYER_STARTING_POINT = player.position
         player.breathe()
         
         
-
+        
         
         
         //add the objects to the scene
         addChild(movingGround)
-        self.view?.addSubview(label)
+        addChild(label)
         addChild(player)
-
+        
         
     }//didMoveToView
     
     
     
-    
-    func didBeginContact(contact: SKPhysicsContact)
+    func reset()
     {
-        //called automatically when two objects begin contact with each other
-    }//didBeginContact
-    
-    func didEndContact(contact: SKPhysicsContact)
-    {
-        //gets called automatically when two objects end contact
-    }//didEndContact
+        player.position = PLAYER_STARTING_POINT
+    }
     
     
     
@@ -138,6 +129,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //increment touch counter every time screen is touched
         counter++
+        
         //things to do on first touch
         if counter == 1{
             player.stop()
@@ -145,18 +137,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             player.startRunning()
             label.hidden = true
         }//if
-        
-        
-        
-        
-        
-        
         if counter > 1
         {
-            print("Player starting height: \(PLAYER_STARTING_HEIGHT)")
-            if ((player.position.y > PLAYER_STARTING_HEIGHT.y - 0.02) && (player.position.y < PLAYER_STARTING_HEIGHT.y + 0.02))
+            print("Player starting height: \(PLAYER_STARTING_POINT)")
+            if ((player.position.y > PLAYER_STARTING_POINT.y - 0.02) && (player.position.y < PLAYER_STARTING_POINT.y + 0.02))
             {
                 //commented out b/c it's causing some strange issues with player's feet flying up
+                //TODO -- create a function that stops the player from running and returns his arm to the initial spot
                 //player.stop()
                 player.jump((view?.frame.height)!/2)
                 //player.startRunning()
@@ -166,15 +153,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         //TEMPORARY ---- this is a placeholder until I add a jump, and collide mechanism with bricks
-        if counter == 3
+        if counter == 5
         {
             backgroundMusicPlayer.stop()
             playBackgroundMusic("game_over.mp3")
         }
         
-     
+        
     }//touches began function
-   
+    
     override func update(currentTime: CFTimeInterval)
     {
         /* Called before each frame is rendered */
