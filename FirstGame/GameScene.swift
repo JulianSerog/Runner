@@ -37,7 +37,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //below is an example of the new try catch in swift 2!
         do {
-            try backgroundMusicPlayer = AVAudioPlayer(contentsOfURL: url!)
+        try backgroundMusicPlayer = AVAudioPlayer(contentsOfURL: url!)
         } catch {
             print("Could not create audio player")
         }//catch

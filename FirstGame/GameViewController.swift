@@ -29,8 +29,12 @@ class GameViewController: UIViewController {
         //present the scene
         skView.presentScene(scene)
         
-    }
+    }//viewDidLoad
 
+    
+    
+    
+    
     override func shouldAutorotate() -> Bool {
         return true
     }
