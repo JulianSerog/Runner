@@ -8,7 +8,7 @@
         <!--Main Menu View Controller-->
         <scene sceneID="mTs-eq-AC9">
             <objects>
-                <viewController id="J0X-FW-Gei" customClass="MainMenuViewController" customModule="FirstGame" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="J0X-FW-Gei" customClass="JSMainMenuViewController" customModule="FirstGame" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dii-cC-txr"/>
                         <viewControllerLayoutGuide type="bottom" id="g5B-Jl-VfX"/>
@@ -25,7 +25,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4JX-jv-LkL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-762" y="203"/>
+            <point key="canvasLocation" x="245" y="-693"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="CtS-rA-C9T">

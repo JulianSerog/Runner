@@ -49,7 +49,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     
-    //function that returns an SKAction
+    //blink animation for text
     func blinkAnimation() -> SKAction
     {
         let duration  = 0.6
@@ -57,11 +57,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let fadeIn = SKAction.fadeAlphaTo(1.0, duration: duration)
         let blink = SKAction.sequence([fadeOut, fadeIn])
         return SKAction.repeatActionForever(blink)
-    }
+    }//blinkAnimation
     
     
     
-    //Starting screen
+    //Start scene
     override func didMoveToView(view: SKView)
     {
         
@@ -72,6 +72,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         label.fontColor = UIColor.blackColor()
         label.runAction(blinkAnimation()) //runs the blink animation forever
         
+        //add physics to world
+        self.physicsWorld.gravity = CGVectorMake(0, -5)
         
         
         //play background music
@@ -83,10 +85,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //create background
         backgroundColor = UIColor(red: 159.0/255.0, green: 201.0/255.0, blue: 244.0/255.0, alpha: 1.0)
         movingGround = ESMovingGround(size: CGSizeMake(view.frame.width, 20))
+        
+        
         //set the position of the ground
-        //set to 0 for ground or frame.height/2 for middle of screen
         movingGround.position = CGPointMake(0, 0)
         
+        //addphysics to moving ground
+        movingGround.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(view.frame.width, movingGround.size.height * 2.0 /*may not need 2.0*/))
+        movingGround.physicsBody?.dynamic = false
         
         
         
@@ -94,6 +100,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         player = ESPlayer()
         player.position = CGPointMake(70, movingGround.position.y + movingGround.frame.size.height + player.frame.size.height/2)
         PLAYER_STARTING_POINT = player.position
+        
+        //TODO: add physics to player and make him breathe
+        player.physicsBody = SKPhysicsBody(rectangleOfSize: player.size)
+        player.physicsBody?.dynamic = true
+        player.physicsBody?.allowsRotation = false
         player.breathe()
         
         
@@ -113,7 +124,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func reset()
     {
         player.position = PLAYER_STARTING_POINT
-    }
+    }//reset
     
     
     
@@ -139,18 +150,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }//if
         if counter > 1
         {
+            player.physicsBody?.velocity = CGVectorMake(0.0, 0.0)
+            player.physicsBody?.applyImpulse(CGVectorMake(0, 25))
+            
+            
+            
             print("Player starting height: \(PLAYER_STARTING_POINT)")
-            if ((player.position.y > PLAYER_STARTING_POINT.y - 0.02) && (player.position.y < PLAYER_STARTING_POINT.y + 0.02))
+            if ((player.position.y < PLAYER_STARTING_POINT.y) /*&& (player.position.y < PLAYER_STARTING_POINT.y + 0.02)*/)
             {
+                player.position.y = PLAYER_STARTING_POINT.y
+
+
+                
+                /*
                 //commented out b/c it's causing some strange issues with player's feet flying up
                 //TODO -- create a function that stops the player from running and returns his arm to the initial spot
                 //player.stop()
                 player.jump((view?.frame.height)!/2)
                 //player.startRunning()
-                
+                */
             }//if player is at initial height
             print("Player Height now: \(player.position)")
-        }
+            
+
+        }//if counter is above 1
         
         //TEMPORARY ---- this is a placeholder until I add a jump, and collide mechanism with bricks
         if counter == 5
