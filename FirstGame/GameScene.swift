@@ -12,7 +12,8 @@ import AVFoundation
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var movingGround: ESMovingGround!
-    var player: ESPlayer!
+    var movingCieling: ESMovingGround!
+    var player: ESSpaceship!
     var backgroundMusicPlayer : AVAudioPlayer!
     var PLAYER_STARTING_POINT : CGPoint!
     var isStarted = false
@@ -20,11 +21,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //starting message
     let label = SKLabelNode(text: "Tap the screen to start!")
     
-    
     //counter for num of touches
     var counter = 0
     
     //background music method
+    /**
+    * plays background music
+    *
+    *
+    */
     func playBackgroundMusic(filename: String)
     {
         let url = NSBundle.mainBundle().URLForResource(filename, withExtension: nil)
@@ -46,10 +51,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         backgroundMusicPlayer.prepareToPlay()
         backgroundMusicPlayer.play()
     }//playBackgroundMusic
-    
+    //DONE BACKGROUND MUSIC
     
     
     //blink animation for text
+    /**
+    * creates blinking animation for starting text label
+    *
+    *
+    */
     func blinkAnimation() -> SKAction
     {
         let duration  = 0.6
@@ -61,7 +71,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     
-    //Start scene
+    //START SCENE
     override func didMoveToView(view: SKView)
     {
         
@@ -69,7 +79,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         label.position.x = view.center.x
         label.position.y = view.center.y
         label.fontName = "TimesNewRomanPS-BoldItalicMT"
-        label.fontColor = UIColor.blackColor()
+        label.fontColor = UIColor.whiteColor()
         label.runAction(blinkAnimation()) //runs the blink animation forever
         
         //add physics to world
@@ -79,16 +89,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //play background music
         playBackgroundMusic("bg_music.mp3")
         
-        
-        
-        
         //create background
-        backgroundColor = UIColor(red: 159.0/255.0, green: 201.0/255.0, blue: 244.0/255.0, alpha: 1.0)
+        backgroundColor = UIColor.blackColor() //TODO: maybe add an image to the background to give it a space feel
         movingGround = ESMovingGround(size: CGSizeMake(view.frame.width, 20))
-        
+        movingCieling = ESMovingGround(size: CGSizeMake(view.frame.width, view.frame.height/15))
         
         //set the position of the ground
         movingGround.position = CGPointMake(0, 0)
+        movingCieling.position = CGPointMake(0, view.frame.height - movingCieling.frame.height)
         
         //addphysics to moving ground
         movingGround.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(view.frame.width, movingGround.size.height * 2.0 /*may not need 2.0*/))
@@ -97,15 +105,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         //create and position the player right above the ground
-        player = ESPlayer()
-        player.position = CGPointMake(70, movingGround.position.y + movingGround.frame.size.height + player.frame.size.height/2)
+        player = ESSpaceship()
+        player.position = CGPointMake(70, view.frame.height/2.0 /*- player.frame.size.height/2*/)
         PLAYER_STARTING_POINT = player.position
         
-        //TODO: add physics to player and make him breathe
-        player.physicsBody = SKPhysicsBody(rectangleOfSize: player.size)
-        player.physicsBody?.dynamic = true
-        player.physicsBody?.allowsRotation = false
-        player.breathe()
+        
         
         
         
@@ -115,12 +119,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(movingGround)
         addChild(label)
         addChild(player)
-        
-        
+        addChild(movingCieling)
     }//didMoveToView
     
     
     
+    
+    //TODO: finish this method
     func reset()
     {
         player.position = PLAYER_STARTING_POINT
@@ -143,39 +148,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //things to do on first touch
         if counter == 1{
-            player.stop()
-            movingGround.start()
-            player.startRunning()
+            //adding the physics body here makes it so that the player doesn't automatically drop when the view starts
+            player.physicsBody = SKPhysicsBody(rectangleOfSize: player.size)
+            player.physicsBody?.dynamic = true
+            player.physicsBody?.allowsRotation = true
             label.hidden = true
         }//if
         if counter > 1
         {
             player.physicsBody?.velocity = CGVectorMake(0.0, 0.0)
-            player.physicsBody?.applyImpulse(CGVectorMake(0, 25))
-            
-            
-            
-            print("Player starting height: \(PLAYER_STARTING_POINT)")
-            if ((player.position.y < PLAYER_STARTING_POINT.y) /*&& (player.position.y < PLAYER_STARTING_POINT.y + 0.02)*/)
-            {
-                player.position.y = PLAYER_STARTING_POINT.y
 
-
-                
-                /*
-                //commented out b/c it's causing some strange issues with player's feet flying up
-                //TODO -- create a function that stops the player from running and returns his arm to the initial spot
-                //player.stop()
-                player.jump((view?.frame.height)!/2)
-                //player.startRunning()
-                */
-            }//if player is at initial height
-            print("Player Height now: \(player.position)")
-            
-
-        }//if counter is above 1
+            player.physicsBody?.applyImpulse(CGVectorMake(0, 60))
+        }
         
-        //TEMPORARY ---- this is a placeholder until I add a jump, and collide mechanism with bricks
         if counter == 5
         {
             backgroundMusicPlayer.stop()
@@ -189,4 +174,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     {
         /* Called before each frame is rendered */
     }//update
+        
 }//class
+

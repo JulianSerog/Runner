@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9E70F7541BD5DDE90017F92B /* JSMainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E70F7531BD5DDE90017F92B /* JSMainMenuViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		9E70F7541BD5DDE90017F92B /* JSMainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E70F7531BD5DDE90017F92B /* JSMainMenuViewController.swift */; };
+		9E7B0F5D1C27BADE0070FAF3 /* ESSpaceship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7B0F5C1C27BADE0070FAF3 /* ESSpaceship.swift */; };
+		9E7B0F5F1C27BBEE0070FAF3 /* speedship.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E7B0F5E1C27BBEE0070FAF3 /* speedship.png */; };
 		9E8AB4681B1E8F5300DFF844 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8AB4671B1E8F5300DFF844 /* AppDelegate.swift */; };
 		9E8AB46A1B1E8F5300DFF844 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9E8AB4691B1E8F5300DFF844 /* GameScene.sks */; };
 		9E8AB46C1B1E8F5300DFF844 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8AB46B1B1E8F5300DFF844 /* GameScene.swift */; };
@@ -35,6 +37,8 @@
 
 /* Begin PBXFileReference section */
 		9E70F7531BD5DDE90017F92B /* JSMainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSMainMenuViewController.swift; sourceTree = "<group>"; };
+		9E7B0F5C1C27BADE0070FAF3 /* ESSpaceship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESSpaceship.swift; sourceTree = "<group>"; };
+		9E7B0F5E1C27BBEE0070FAF3 /* speedship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = speedship.png; sourceTree = "<group>"; };
 		9E8AB4621B1E8F5200DFF844 /* FirstGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E8AB4661B1E8F5200DFF844 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E8AB4671B1E8F5300DFF844 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +100,7 @@
 				9E8AB4671B1E8F5300DFF844 /* AppDelegate.swift */,
 				9E8AB4691B1E8F5300DFF844 /* GameScene.sks */,
 				9E8AB46B1B1E8F5300DFF844 /* GameScene.swift */,
+				9E7B0F5C1C27BADE0070FAF3 /* ESSpaceship.swift */,
 				9E8AB4991B1EB71100DFF844 /* ESPlayer.swift */,
 				9E8AB4971B1EA12900DFF844 /* ESMovingGround.swift */,
 				9E8AB46D1B1E8F5300DFF844 /* GameViewController.swift */,
@@ -103,6 +108,7 @@
 				9E70F7531BD5DDE90017F92B /* JSMainMenuViewController.swift */,
 				9E8BE49A1B5F01DD00FCA156 /* bg_music.mp3 */,
 				9E8BE49C1B5F05E400FCA156 /* game_over.mp3 */,
+				9E7B0F5E1C27BBEE0070FAF3 /* speedship.png */,
 				9E8AB48B1B1E917200DFF844 /* img */,
 				9E8AB4721B1E8F5300DFF844 /* Images.xcassets */,
 				9EFD080A1B210BFE003E269C /* man.png */,
@@ -232,6 +238,7 @@
 				9EFD080B1B210BFE003E269C /* man.png in Resources */,
 				9E8AB4731B1E8F5300DFF844 /* Images.xcassets in Resources */,
 				9E8BE49D1B5F05E500FCA156 /* game_over.mp3 in Resources */,
+				9E7B0F5F1C27BBEE0070FAF3 /* speedship.png in Resources */,
 				9E8AB46A1B1E8F5300DFF844 /* GameScene.sks in Resources */,
 				9E8AB4711B1E8F5300DFF844 /* Main.storyboard in Resources */,
 			);
@@ -251,6 +258,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E7B0F5D1C27BADE0070FAF3 /* ESSpaceship.swift in Sources */,
 				9E70F7541BD5DDE90017F92B /* JSMainMenuViewController.swift in Sources */,
 				9E8AB46C1B1E8F5300DFF844 /* GameScene.swift in Sources */,
 				9E8AB46E1B1E8F5300DFF844 /* GameViewController.swift in Sources */,

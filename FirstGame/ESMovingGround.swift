@@ -18,13 +18,13 @@ class ESMovingGround: SKSpriteNode
 {
     //declare constants
     let NUMBER_OF_SEGMENTS = 20
-    let COLOR_ONE = UIColor(red: 0.2, green: 0.8, blue: 0.1, alpha: 1)
+    let COLOR_ONE = UIColor(red: 0.255, green: 0.33, blue: 0.33, alpha: 1)
     let COLOR_TWO = UIColor(red: 0.4, green: 0.7, blue: 0.2, alpha: 1)
     
     //constructor
     init(size: CGSize)
     {
-        super.init(texture: nil, color: UIColor.brownColor(), size: CGSizeMake(size.width*2, size.height))
+        super.init(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(size.width*2, size.height))
         anchorPoint = CGPointMake(0, 0)
         
         for var i = 0; i < NUMBER_OF_SEGMENTS; i++
