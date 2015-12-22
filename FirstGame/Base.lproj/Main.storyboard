@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
-        <!--Main Menu View Controller-->
+        <!--MainMenuViewController-->
         <scene sceneID="mTs-eq-AC9">
             <objects>
-                <viewController id="J0X-FW-Gei" customClass="JSMainMenuViewController" customModule="FirstGame" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="MainMenuViewController" id="J0X-FW-Gei" customClass="JSMainMenuViewController" customModule="FirstGame" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dii-cC-txr"/>
                         <viewControllerLayoutGuide type="bottom" id="g5B-Jl-VfX"/>
@@ -26,10 +26,10 @@
             </objects>
             <point key="canvasLocation" x="245" y="-693"/>
         </scene>
-        <!--Game View Controller-->
+        <!--GameScene-->
         <scene sceneID="CtS-rA-C9T">
             <objects>
-                <viewController id="LVB-YS-i5n" customClass="GameViewController" customModule="FirstGame" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="GameScene" modalTransitionStyle="crossDissolve" id="LVB-YS-i5n" customClass="GameViewController" customModule="FirstGame" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PCf-gQ-wO7"/>
                         <viewControllerLayoutGuide type="bottom" id="b3d-qh-BLL"/>
@@ -39,9 +39,13 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <segue destination="J0X-FW-Gei" kind="show" identifier="toMainMenu" id="mNg-Nq-jMV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="btX-cZ-eVz" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="203" y="370"/>
         </scene>
     </scenes>
 </document>

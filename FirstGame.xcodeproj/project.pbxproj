@@ -25,6 +25,7 @@
 		9EF001891C29200600C1361F /* game_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9EF001881C29200600C1361F /* game_bg.jpg */; };
 		9EF0018B1C29201500C1361F /* space.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9EF0018A1C29201500C1361F /* space.jpg */; };
 		9EFD080B1B210BFE003E269C /* man.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EFD080A1B210BFE003E269C /* man.png */; };
+		9EFD19E21C2A050B00BEEECC /* start.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EFD19E11C2A050B00BEEECC /* start.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		9EF001881C29200600C1361F /* game_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = game_bg.jpg; sourceTree = "<group>"; };
 		9EF0018A1C29201500C1361F /* space.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = space.jpg; sourceTree = "<group>"; };
 		9EFD080A1B210BFE003E269C /* man.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = man.png; sourceTree = "<group>"; };
+		9EFD19E11C2A050B00BEEECC /* start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = start.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 		9E8AB48B1B1E917200DFF844 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				9EFD19E11C2A050B00BEEECC /* start.png */,
 				9E7B0F5E1C27BBEE0070FAF3 /* speedship.png */,
 				9EF0018A1C29201500C1361F /* space.jpg */,
 				9EF001881C29200600C1361F /* game_bg.jpg */,
@@ -244,6 +247,7 @@
 				9EF0018B1C29201500C1361F /* space.jpg in Resources */,
 				9EFD080B1B210BFE003E269C /* man.png in Resources */,
 				9EF001891C29200600C1361F /* game_bg.jpg in Resources */,
+				9EFD19E21C2A050B00BEEECC /* start.png in Resources */,
 				9E8AB4731B1E8F5300DFF844 /* Images.xcassets in Resources */,
 				9E8BE49D1B5F05E500FCA156 /* game_over.mp3 in Resources */,
 				9E7B0F5F1C27BBEE0070FAF3 /* speedship.png in Resources */,

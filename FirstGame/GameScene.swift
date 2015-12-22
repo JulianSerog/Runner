@@ -17,6 +17,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var backgroundMusicPlayer : AVAudioPlayer!
     var PLAYER_STARTING_POINT : CGPoint!
     var isStarted = false
+    let pauseButton: UIButton = UIButton(type: UIButtonType.System)
     //let bg = UIImageView()
     var bg : SKSpriteNode!
     
@@ -124,6 +125,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bg.size = CGSize(width: view!.frame.width, height:( view?.frame.height)!)
         bg.position = CGPointMake((view?.frame.width)!/2, view!.frame.height/2)
         
+        //pause button
+        pauseButton.frame = CGRectMake(0, 0, view!.frame.width * 0.10, view!.frame.height * 0.10)
+        pauseButton.backgroundColor = UIColor.whiteColor()
+        pauseButton.alpha = 0.5
+        pauseButton.titleLabel?.textAlignment = NSTextAlignment.Center
+        pauseButton.titleLabel?.textAlignment = NSTextAlignment.Center
+        pauseButton.setTitle("pause", forState: UIControlState.Normal)
+        pauseButton.tintColor = UIColor.clearColor()
+        pauseButton.addTarget(self, action: "pauseButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
+        pauseButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+
         
         //create and position the player right above the ground
         player = ESSpaceship()
@@ -154,13 +166,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(label)
         addChild(player)
         addChild(movingCieling)
+        view!.addSubview(pauseButton)
     }//addElementsAndUI
     
     
-    
-    
     //MARK: touches began
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
+    {
         /* Called when a touch begins */
         
         
@@ -168,7 +180,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         counter++
         
         //things to do on first touch
-        if counter == 1{
+        if counter == 1
+        {
             //adding the physics body here makes it so that the player doesn't automatically drop when the view starts
             player.physicsBody = SKPhysicsBody(texture: player.texture!, size: player.size)
             player.physicsBody?.dynamic = true
@@ -181,13 +194,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
             player.physicsBody?.applyImpulse(CGVectorMake(0, 15))
         }//if
-        
         if counter == 5
         {
             backgroundMusicPlayer.stop()
             playBackgroundMusic("game_over.mp3")
         }//if
     }//touches began function
+    
     
     //MARK: update
     override func update(currentTime: CFTimeInterval)
@@ -197,14 +210,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     //MARK: did Begin Contact
-    func didBeginContact(contact: SKPhysicsContact) {
+    func didBeginContact(contact: SKPhysicsContact)
+    {
         print("A collision occured between two objects")
     }//didBeginContact
     
     //MARK: didEndContact
-    func didEndContact(contact: SKPhysicsContact) {
+    func didEndContact(contact: SKPhysicsContact)
+    {
         print("A collision ended")
     }
+    
+    //TODO: find out why this isn't working
+    //MARK: pause button pressed
+    /*
+    func pauseButtonPressed()
+    {
+        performSegueWithIdentifier("toMainMenu", sender: self)
+    }//pauseButtonPressed
+    */
     
 
     
@@ -213,7 +237,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
 
 //TODO: make an astroid/obstacle class and implement in main game
-//create pause button
+//TODO: get pause button to work
 //make start screen less ugly
-//maybe a picture background for the game?
 //create collision detection for game loss
