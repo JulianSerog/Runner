@@ -28,7 +28,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     /**
     * plays background music
     *
-    *
     */
     func playBackgroundMusic(filename: String)
     {
@@ -83,7 +82,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         label.runAction(blinkAnimation()) //runs the blink animation forever
         
         //add physics to world
-        self.physicsWorld.gravity = CGVectorMake(0, -5)
+        self.physicsWorld.gravity = CGVectorMake(0, -3.5)
         
         
         //play background music
@@ -99,9 +98,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         movingCieling.position = CGPointMake(0, view.frame.height - movingCieling.frame.height)
         
         //addphysics to moving ground
-        movingGround.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(view.frame.width, movingGround.size.height * 2.0 /*may not need 2.0*/))
+        movingGround.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(view.frame.width, movingGround.size.height * 2))
         movingGround.physicsBody?.dynamic = false
-        
+        movingCieling.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(view.frame.width, movingCieling.size.height/2))
+        movingCieling.physicsBody?.dynamic = false
         
         
         //create and position the player right above the ground
@@ -149,7 +149,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //things to do on first touch
         if counter == 1{
             //adding the physics body here makes it so that the player doesn't automatically drop when the view starts
-            player.physicsBody = SKPhysicsBody(rectangleOfSize: player.size)
+            player.physicsBody = SKPhysicsBody(texture: player.texture!, size: player.size)
             player.physicsBody?.dynamic = true
             player.physicsBody?.allowsRotation = true
             label.hidden = true
@@ -158,7 +158,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         {
             player.physicsBody?.velocity = CGVectorMake(0.0, 0.0)
 
-            player.physicsBody?.applyImpulse(CGVectorMake(0, 60))
+            player.physicsBody?.applyImpulse(CGVectorMake(0, 15))
         }
         
         if counter == 5
