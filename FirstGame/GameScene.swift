@@ -177,3 +177,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
 }//class
 
+
+//TODO: make an astroid/obstacle class and implement in main game
+//create pause button
+//make start screen less ugly
+//maybe a picture background for the game?
+//create collision detection for game loss
