@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9E70F7541BD5DDE90017F92B /* JSMainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E70F7531BD5DDE90017F92B /* JSMainMenuViewController.swift */; };
-		9E7B0F5D1C27BADE0070FAF3 /* ESSpaceship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7B0F5C1C27BADE0070FAF3 /* ESSpaceship.swift */; };
+		9E7B0F5D1C27BADE0070FAF3 /* JSSpaceship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7B0F5C1C27BADE0070FAF3 /* JSSpaceship.swift */; };
 		9E7B0F5F1C27BBEE0070FAF3 /* speedship.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E7B0F5E1C27BBEE0070FAF3 /* speedship.png */; };
 		9E8AB4681B1E8F5300DFF844 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8AB4671B1E8F5300DFF844 /* AppDelegate.swift */; };
 		9E8AB46A1B1E8F5300DFF844 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9E8AB4691B1E8F5300DFF844 /* GameScene.sks */; };
@@ -18,10 +18,12 @@
 		9E8AB4731B1E8F5300DFF844 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E8AB4721B1E8F5300DFF844 /* Images.xcassets */; };
 		9E8AB4761B1E8F5300DFF844 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E8AB4741B1E8F5300DFF844 /* LaunchScreen.xib */; };
 		9E8AB4821B1E8F5300DFF844 /* FirstGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8AB4811B1E8F5300DFF844 /* FirstGameTests.swift */; };
-		9E8AB4981B1EA12900DFF844 /* ESMovingGround.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8AB4971B1EA12900DFF844 /* ESMovingGround.swift */; };
-		9E8AB49A1B1EB71100DFF844 /* ESPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8AB4991B1EB71100DFF844 /* ESPlayer.swift */; };
+		9E8AB4981B1EA12900DFF844 /* JSMovingGround.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8AB4971B1EA12900DFF844 /* JSMovingGround.swift */; };
+		9E8AB49A1B1EB71100DFF844 /* JSPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8AB4991B1EB71100DFF844 /* JSPlayer.swift */; };
 		9E8BE49B1B5F01DD00FCA156 /* bg_music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9E8BE49A1B5F01DD00FCA156 /* bg_music.mp3 */; };
 		9E8BE49D1B5F05E500FCA156 /* game_over.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9E8BE49C1B5F05E400FCA156 /* game_over.mp3 */; };
+		9EF001891C29200600C1361F /* game_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9EF001881C29200600C1361F /* game_bg.jpg */; };
+		9EF0018B1C29201500C1361F /* space.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9EF0018A1C29201500C1361F /* space.jpg */; };
 		9EFD080B1B210BFE003E269C /* man.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EFD080A1B210BFE003E269C /* man.png */; };
 /* End PBXBuildFile section */
 
@@ -37,7 +39,7 @@
 
 /* Begin PBXFileReference section */
 		9E70F7531BD5DDE90017F92B /* JSMainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSMainMenuViewController.swift; sourceTree = "<group>"; };
-		9E7B0F5C1C27BADE0070FAF3 /* ESSpaceship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESSpaceship.swift; sourceTree = "<group>"; };
+		9E7B0F5C1C27BADE0070FAF3 /* JSSpaceship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSSpaceship.swift; sourceTree = "<group>"; };
 		9E7B0F5E1C27BBEE0070FAF3 /* speedship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = speedship.png; sourceTree = "<group>"; };
 		9E8AB4621B1E8F5200DFF844 /* FirstGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E8AB4661B1E8F5200DFF844 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -51,10 +53,12 @@
 		9E8AB47B1B1E8F5300DFF844 /* FirstGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FirstGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E8AB4801B1E8F5300DFF844 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E8AB4811B1E8F5300DFF844 /* FirstGameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstGameTests.swift; sourceTree = "<group>"; };
-		9E8AB4971B1EA12900DFF844 /* ESMovingGround.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESMovingGround.swift; sourceTree = "<group>"; };
-		9E8AB4991B1EB71100DFF844 /* ESPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ESPlayer.swift; sourceTree = "<group>"; };
+		9E8AB4971B1EA12900DFF844 /* JSMovingGround.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSMovingGround.swift; sourceTree = "<group>"; };
+		9E8AB4991B1EB71100DFF844 /* JSPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSPlayer.swift; sourceTree = "<group>"; };
 		9E8BE49A1B5F01DD00FCA156 /* bg_music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bg_music.mp3; sourceTree = "<group>"; };
 		9E8BE49C1B5F05E400FCA156 /* game_over.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = game_over.mp3; sourceTree = "<group>"; };
+		9EF001881C29200600C1361F /* game_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = game_bg.jpg; sourceTree = "<group>"; };
+		9EF0018A1C29201500C1361F /* space.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = space.jpg; sourceTree = "<group>"; };
 		9EFD080A1B210BFE003E269C /* man.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = man.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -100,15 +104,14 @@
 				9E8AB4671B1E8F5300DFF844 /* AppDelegate.swift */,
 				9E8AB4691B1E8F5300DFF844 /* GameScene.sks */,
 				9E8AB46B1B1E8F5300DFF844 /* GameScene.swift */,
-				9E7B0F5C1C27BADE0070FAF3 /* ESSpaceship.swift */,
-				9E8AB4991B1EB71100DFF844 /* ESPlayer.swift */,
-				9E8AB4971B1EA12900DFF844 /* ESMovingGround.swift */,
+				9E7B0F5C1C27BADE0070FAF3 /* JSSpaceship.swift */,
+				9E8AB4991B1EB71100DFF844 /* JSPlayer.swift */,
+				9E8AB4971B1EA12900DFF844 /* JSMovingGround.swift */,
+				9E70F7531BD5DDE90017F92B /* JSMainMenuViewController.swift */,
 				9E8AB46D1B1E8F5300DFF844 /* GameViewController.swift */,
 				9E8AB46F1B1E8F5300DFF844 /* Main.storyboard */,
-				9E70F7531BD5DDE90017F92B /* JSMainMenuViewController.swift */,
 				9E8BE49A1B5F01DD00FCA156 /* bg_music.mp3 */,
 				9E8BE49C1B5F05E400FCA156 /* game_over.mp3 */,
-				9E7B0F5E1C27BBEE0070FAF3 /* speedship.png */,
 				9E8AB48B1B1E917200DFF844 /* img */,
 				9E8AB4721B1E8F5300DFF844 /* Images.xcassets */,
 				9EFD080A1B210BFE003E269C /* man.png */,
@@ -146,6 +149,9 @@
 		9E8AB48B1B1E917200DFF844 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				9E7B0F5E1C27BBEE0070FAF3 /* speedship.png */,
+				9EF0018A1C29201500C1361F /* space.jpg */,
+				9EF001881C29200600C1361F /* game_bg.jpg */,
 			);
 			name = img;
 			sourceTree = "<group>";
@@ -235,7 +241,9 @@
 			files = (
 				9E8AB4761B1E8F5300DFF844 /* LaunchScreen.xib in Resources */,
 				9E8BE49B1B5F01DD00FCA156 /* bg_music.mp3 in Resources */,
+				9EF0018B1C29201500C1361F /* space.jpg in Resources */,
 				9EFD080B1B210BFE003E269C /* man.png in Resources */,
+				9EF001891C29200600C1361F /* game_bg.jpg in Resources */,
 				9E8AB4731B1E8F5300DFF844 /* Images.xcassets in Resources */,
 				9E8BE49D1B5F05E500FCA156 /* game_over.mp3 in Resources */,
 				9E7B0F5F1C27BBEE0070FAF3 /* speedship.png in Resources */,
@@ -258,13 +266,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9E7B0F5D1C27BADE0070FAF3 /* ESSpaceship.swift in Sources */,
+				9E7B0F5D1C27BADE0070FAF3 /* JSSpaceship.swift in Sources */,
 				9E70F7541BD5DDE90017F92B /* JSMainMenuViewController.swift in Sources */,
 				9E8AB46C1B1E8F5300DFF844 /* GameScene.swift in Sources */,
 				9E8AB46E1B1E8F5300DFF844 /* GameViewController.swift in Sources */,
-				9E8AB4981B1EA12900DFF844 /* ESMovingGround.swift in Sources */,
+				9E8AB4981B1EA12900DFF844 /* JSMovingGround.swift in Sources */,
 				9E8AB4681B1E8F5300DFF844 /* AppDelegate.swift in Sources */,
-				9E8AB49A1B1EB71100DFF844 /* ESPlayer.swift in Sources */,
+				9E8AB49A1B1EB71100DFF844 /* JSPlayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,7 +14,7 @@ import SpriteKit
 *   when we click, our ground starts to move
 *
 */
-class ESMovingGround: SKSpriteNode
+class JSMovingGround: SKSpriteNode
 {
     //declare constants
     let NUMBER_OF_SEGMENTS = 20
