@@ -17,9 +17,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var backgroundMusicPlayer : AVAudioPlayer!
     var PLAYER_STARTING_POINT : CGPoint!
     var isStarted = false
-    let pauseButton: UIButton = UIButton(type: UIButtonType.System)
-    //let bg = UIImageView()
+    let pauseButton: UIButton = UIButton(type: UIButtonType.Custom)
+    var isHit = false
     var bg : SKSpriteNode!
+    var pause = false
+    
     
     //starting message
     let label = SKLabelNode(text: "Tap the screen to start!")
@@ -39,14 +41,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addElementsAndUI()
         
         
-        //TODO: test
-        if player.physicsBody?.collisionBitMask == movingGround.physicsBody?.collisionBitMask
-        {
-            print("intersected")
-        }
-        
+        //MARK: physics hit detection fixed here
         physicsWorld.contactDelegate = self
-        
+        player.physicsBody?.categoryBitMask = 0x1 << 0
+        movingGround.physicsBody?.categoryBitMask = 0x1 << 1
+        movingGround.physicsBody?.contactTestBitMask = 0x1 << 0
+        movingCieling.physicsBody?.contactTestBitMask = 0x1 << 0
+        movingCieling.physicsBody?.categoryBitMask = 0x1 << 1
     }//didMoveToView
     
     
@@ -126,9 +127,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bg.position = CGPointMake((view?.frame.width)!/2, view!.frame.height/2)
         
         //pause button
-        pauseButton.frame = CGRectMake(0, 0, view!.frame.width * 0.10, view!.frame.height * 0.10)
+        pauseButton.frame = CGRectMake(0, view!.frame.height - (view?.frame.height)! * 0.10, view!.frame.width * 0.10, view!.frame.height * 0.10)
         pauseButton.backgroundColor = UIColor.whiteColor()
-        pauseButton.alpha = 0.5
         pauseButton.titleLabel?.textAlignment = NSTextAlignment.Center
         pauseButton.titleLabel?.textAlignment = NSTextAlignment.Center
         pauseButton.setTitle("pause", forState: UIControlState.Normal)
@@ -187,17 +187,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             player.physicsBody?.dynamic = true
             player.physicsBody?.allowsRotation = true
             label.hidden = true
+            //move barriers
+            movingGround.start()
+            movingCieling.start()
         }//if
         if counter > 1
         {
             player.physicsBody?.velocity = CGVectorMake(0.0, 0.0)
 
             player.physicsBody?.applyImpulse(CGVectorMake(0, 15))
-        }//if
-        if counter == 5
-        {
-            backgroundMusicPlayer.stop()
-            playBackgroundMusic("game_over.mp3")
         }//if
     }//touches began function
     
@@ -212,23 +210,49 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //MARK: did Begin Contact
     func didBeginContact(contact: SKPhysicsContact)
     {
-        print("A collision occured between two objects")
+        if isHit != true
+        {
+            isHit = true
+            backgroundMusicPlayer.stop()
+            playBackgroundMusic("game_over.mp3")
+            sleep(1) //TODO: try to find out why physics gravity and speed don't wait for the timer
+            print("A collision occured between two objects")
+            physicsWorld.gravity = CGVector.zero
+            physicsWorld.speed = 0.0
+            movingCieling.stop()
+            movingGround.stop()
+        }
     }//didBeginContact
     
-    //MARK: didEndContact
-    func didEndContact(contact: SKPhysicsContact)
-    {
-        print("A collision ended")
-    }
     
-    //TODO: find out why this isn't working
+    
+    //TODO: find out why segue isn't performing
     //MARK: pause button pressed
-    /*
     func pauseButtonPressed()
     {
-        performSegueWithIdentifier("toMainMenu", sender: self)
+        if pause == false
+        {
+            pause = true
+            print(physicsWorld.speed) //to find current speed
+            physicsWorld.speed = 0.0
+            //performSegueWithIdentifier("toMainMenu", sender: self)
+            pauseButton.setTitle("resume", forState: UIControlState.Normal)
+            print("entered pause, pause var is now:   \(pause)")
+            movingCieling.stop()
+            movingGround.stop()
+        }//if
+        //TODO: why is this not entering the else statement
+        else if pause == true && isHit == false
+        {
+            pause = false
+            pauseButton.setTitle("pause", forState: UIControlState.Normal)
+            physicsWorld.speed = 1.0 //resumes game
+            movingGround.start()
+            movingCieling.start()
+        }//else
+        print("button pressed")
     }//pauseButtonPressed
-    */
+    
     
 
     
@@ -237,6 +261,4 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
 
 //TODO: make an astroid/obstacle class and implement in main game
-//TODO: get pause button to work
-//make start screen less ugly
-//create collision detection for game loss
+//TODO: make start screen & barriers less ugly

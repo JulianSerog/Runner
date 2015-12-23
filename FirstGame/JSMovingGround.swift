@@ -58,12 +58,13 @@ class JSMovingGround: SKSpriteNode
     func start(){
         let resetPosition = SKAction.moveToX(0, duration: 0)
         let moveLeft = SKAction.moveByX(-frame.size.width/2, y: 0, duration: 1.0)
-        
         let moveSequence = SKAction.sequence([moveLeft,resetPosition])
-        
-        
-        
         runAction(SKAction.repeatActionForever(moveSequence))
+    }
+    
+    func stop()
+    {
+        self.removeAllActions()
     }
     
     
@@ -76,3 +77,6 @@ class JSMovingGround: SKSpriteNode
         fatalError("init(coder:) has not been implemented")
     }//required init
 }//class
+
+
+//TODO: fix some of the wierd things going on with the ground/cieling running out when pausing the game
