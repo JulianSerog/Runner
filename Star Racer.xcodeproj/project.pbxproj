@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E2F6A4B1C2E2F8500599CAD /* JSCustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2F6A4A1C2E2F8500599CAD /* JSCustomColors.swift */; };
 		9E70F7541BD5DDE90017F92B /* JSMainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E70F7531BD5DDE90017F92B /* JSMainMenuViewController.swift */; };
 		9E7B0F5D1C27BADE0070FAF3 /* JSSpaceship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7B0F5C1C27BADE0070FAF3 /* JSSpaceship.swift */; };
 		9E7B0F5F1C27BBEE0070FAF3 /* speedship.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E7B0F5E1C27BBEE0070FAF3 /* speedship.png */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9E2F6A4A1C2E2F8500599CAD /* JSCustomColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSCustomColors.swift; sourceTree = "<group>"; };
 		9E70F7531BD5DDE90017F92B /* JSMainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSMainMenuViewController.swift; sourceTree = "<group>"; };
 		9E7B0F5C1C27BADE0070FAF3 /* JSSpaceship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSSpaceship.swift; sourceTree = "<group>"; };
 		9E7B0F5E1C27BBEE0070FAF3 /* speedship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = speedship.png; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				9E7B0F5C1C27BADE0070FAF3 /* JSSpaceship.swift */,
 				9E8AB4991B1EB71100DFF844 /* JSPlayer.swift */,
 				9E8AB4971B1EA12900DFF844 /* JSMovingGround.swift */,
+				9E2F6A4A1C2E2F8500599CAD /* JSCustomColors.swift */,
 				9E70F7531BD5DDE90017F92B /* JSMainMenuViewController.swift */,
 				9E8AB46D1B1E8F5300DFF844 /* GameViewController.swift */,
 				9E8AB46F1B1E8F5300DFF844 /* Main.storyboard */,
@@ -267,6 +270,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E7B0F5D1C27BADE0070FAF3 /* JSSpaceship.swift in Sources */,
+				9E2F6A4B1C2E2F8500599CAD /* JSCustomColors.swift in Sources */,
 				9E70F7541BD5DDE90017F92B /* JSMainMenuViewController.swift in Sources */,
 				9E8AB46C1B1E8F5300DFF844 /* GameScene.swift in Sources */,
 				9E8AB46E1B1E8F5300DFF844 /* GameViewController.swift in Sources */,

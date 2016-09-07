@@ -45,7 +45,7 @@ class JSMainMenuViewController: UIViewController
         // 3)start button
         startButton.setImage(buttonImage, forState: UIControlState.Normal)
         startButton.frame = CGRectMake(view.frame.width/2 - view.frame.width * 0.15, view.frame.height/2 - view.frame.height * 0.15, view.frame.width * 0.30, view.frame.height * 0.30)
-        startButton.addTarget(self, action: "startButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
+        startButton.addTarget(self, action: #selector(JSMainMenuViewController.startButtonPressed), forControlEvents: UIControlEvents.TouchUpInside)
         startButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         
         
@@ -74,6 +74,7 @@ class JSMainMenuViewController: UIViewController
         
         
     }
+    
     
     
 }//MainMenuViewController

@@ -22,6 +22,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var bg : SKSpriteNode!
     var pause = false
     
+    var viewController: UIViewController?
+    
     
     //starting message
     let label = SKLabelNode(text: "Tap the screen to start!")
@@ -133,7 +135,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pauseButton.titleLabel?.textAlignment = NSTextAlignment.Center
         pauseButton.setTitle("pause", forState: UIControlState.Normal)
         pauseButton.tintColor = UIColor.clearColor()
-        pauseButton.addTarget(self, action: "pauseButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
+        pauseButton.addTarget(self, action: #selector(GameScene.pauseButtonPressed), forControlEvents: UIControlEvents.TouchUpInside)
         pauseButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
 
         
@@ -177,7 +179,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
         //increment touch counter every time screen is touched
-        counter++
+        counter += 1
         
         //things to do on first touch
         if counter == 1
@@ -188,8 +190,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             player.physicsBody?.allowsRotation = true
             label.hidden = true
             //move barriers
-            movingGround.start()
-            movingCieling.start()
+            //movingGround.start() //TODO: create a static MG and MC so collisions still occur because movement messes up collisions
+            //movingCieling.start()
         }//if
         if counter > 1
         {
@@ -235,7 +237,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             pause = true
             print(physicsWorld.speed) //to find current speed
             physicsWorld.speed = 0.0
-            //performSegueWithIdentifier("toMainMenu", sender: self)
+            //performSegueWithIdentifier("toMainMenu", sender: self) //not available in SKScene
             pauseButton.setTitle("resume", forState: UIControlState.Normal)
             print("entered pause, pause var is now:   \(pause)")
             movingCieling.stop()

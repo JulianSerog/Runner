@@ -18,8 +18,8 @@ class JSMovingGround: SKSpriteNode
 {
     //declare constants
     let NUMBER_OF_SEGMENTS = 20
-    let COLOR_ONE = UIColor(red: 0.255, green: 0.33, blue: 0.33, alpha: 1)
-    let COLOR_TWO = UIColor(red: 0.4, green: 0.7, blue: 0.2, alpha: 1)
+    let COLOR_ONE = UIColor.whiteColor()
+    let COLOR_TWO = UIColor.blackColor()
     
     //constructor
     init(size: CGSize)
@@ -27,7 +27,7 @@ class JSMovingGround: SKSpriteNode
         super.init(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(size.width*2, size.height))
         anchorPoint = CGPointMake(0, 0)
         
-        for var i = 0; i < NUMBER_OF_SEGMENTS; i++
+        for i in 0 ..< NUMBER_OF_SEGMENTS
         {
             //the explanation point basically means that we promise we are going to initialize this color later on
             var segmentColor: UIColor!

@@ -8,7 +8,7 @@
         <!--MainMenuViewController-->
         <scene sceneID="mTs-eq-AC9">
             <objects>
-                <viewController title="MainMenuViewController" id="J0X-FW-Gei" customClass="JSMainMenuViewController" customModule="FirstGame" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="MainMenuViewController" id="J0X-FW-Gei" customClass="JSMainMenuViewController" customModule="Star_Racer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dii-cC-txr"/>
                         <viewControllerLayoutGuide type="bottom" id="g5B-Jl-VfX"/>
@@ -29,7 +29,7 @@
         <!--GameScene-->
         <scene sceneID="CtS-rA-C9T">
             <objects>
-                <viewController title="GameScene" modalTransitionStyle="crossDissolve" id="LVB-YS-i5n" customClass="GameViewController" customModule="FirstGame" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="GameScene" modalTransitionStyle="crossDissolve" id="LVB-YS-i5n" customClass="GameViewController" customModule="Star_Racer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PCf-gQ-wO7"/>
                         <viewControllerLayoutGuide type="bottom" id="b3d-qh-BLL"/>
