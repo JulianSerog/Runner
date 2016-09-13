@@ -19,15 +19,13 @@ class JSMainMenuViewController: UIViewController
     //var isStarted: Bool = false
     
     
-    override func viewWillAppear(animated: Bool)
-    {
+    override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         addUI()
     }//viewWillAppear
     
     
-    func addUI()
-    {
+    func addUI() {
         
         // 1) bg image
         backgroundImage.image = UIImage(named: "space.jpg")
@@ -59,8 +57,7 @@ class JSMainMenuViewController: UIViewController
     }//addUI
     
     
-    func startButtonPressed()
-    {
+    func startButtonPressed() {
         
         /*
         //TODO: make create a new game and continue game button/function

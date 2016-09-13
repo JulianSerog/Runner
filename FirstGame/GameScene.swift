@@ -21,6 +21,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var isHit = false
     var bg : SKSpriteNode!
     var pause = false
+    var asteroid : JSAsteroid!
     
     var viewController: UIViewController?
     
@@ -62,8 +63,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     //MARK: playBackgroundMusic
-    func playBackgroundMusic(filename: String)
-    {
+    func playBackgroundMusic(filename: String) {
         let url = NSBundle.mainBundle().URLForResource(filename, withExtension: nil)
         if(url == nil)
         {
@@ -86,15 +86,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     //TODO: finish this method
-    func reset()
-    {
+    func reset() {
         player.position = PLAYER_STARTING_POINT
     }//reset
     
     
     //MARK: addPhysicsToWorld
-    func addPhysicsToWorld()
-    {
+    func addPhysicsToWorld() {
         
         //add physics to world
         self.physicsWorld.gravity = CGVectorMake(0, -3.5)
@@ -110,8 +108,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
 
     //MARK: blink animation
-    func blinkAnimation() -> SKAction
-    {
+    func blinkAnimation() -> SKAction {
         let duration  = 0.6
         let fadeOut = SKAction.fadeAlphaTo(0.0, duration: duration)
         let fadeIn = SKAction.fadeAlphaTo(1.0, duration: duration)
@@ -121,9 +118,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     //MARK: add elementsAndUI
-    func addElementsAndUI()
-    {
+    func addElementsAndUI() {
         //add background
+        
         bg = SKSpriteNode(imageNamed: "game_bg.jpg")
         bg.size = CGSize(width: view!.frame.width, height:( view?.frame.height)!)
         bg.position = CGPointMake((view?.frame.width)!/2, view!.frame.height/2)
@@ -152,6 +149,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         movingGround.position = CGPointMake(0, 0)
         movingCieling.position = CGPointMake(0, view!.frame.height - movingCieling.frame.height)
         
+        //TODO: asteroid
+        asteroid = JSAsteroid(scene: self)
+        
+        /*
+        var thing = SKSpriteNode(color: SKColor.cyanColor(), size: CGSizeMake(30, 30))
+        thing.position = CGPointMake((scene?.frame.width)!/2, (scene?.frame.height)!/2)
+        addChild(thing)
+        */
         //physics
         addPhysicsToWorld()
         
@@ -168,16 +173,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(label)
         addChild(player)
         addChild(movingCieling)
+        addChild(asteroid)
         view!.addSubview(pauseButton)
     }//addElementsAndUI
     
     
     //MARK: touches began
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
-    {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         /* Called when a touch begins */
-        
-        
         //increment touch counter every time screen is touched
         counter += 1
         
@@ -223,7 +226,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             physicsWorld.speed = 0.0
             movingCieling.stop()
             movingGround.stop()
-        }
+        }//if
     }//didBeginContact
     
     

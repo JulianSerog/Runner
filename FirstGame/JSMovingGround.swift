@@ -18,8 +18,8 @@ class JSMovingGround: SKSpriteNode
 {
     //declare constants
     let NUMBER_OF_SEGMENTS = 20
-    let COLOR_ONE = UIColor.whiteColor()
-    let COLOR_TWO = UIColor.blackColor()
+    let COLOR_ONE = UIColor.redColor()
+    let COLOR_TWO = UIColor.redColor()
     
     //constructor
     init(size: CGSize)
@@ -37,15 +37,6 @@ class JSMovingGround: SKSpriteNode
             else {
                 segmentColor = COLOR_TWO
             }//else
-            
-            
-            
-            
-            
-            
-            
-            
-            
             
             let segment = SKSpriteNode(color:segmentColor, size: CGSizeMake(self.size.width / CGFloat(NUMBER_OF_SEGMENTS), self.size.height ))
             segment.anchorPoint = CGPointMake(0.0, 0)
