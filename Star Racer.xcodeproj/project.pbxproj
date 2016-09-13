@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9E2380FD1D8852F700F4BBF5 /* JSAsteroid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2380FC1D8852F700F4BBF5 /* JSAsteroid.swift */; };
+		9E2802021D888D5F003E2976 /* asteroid.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E2802011D888D5F003E2976 /* asteroid.png */; };
 		9E2F6A4B1C2E2F8500599CAD /* JSCustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E2F6A4A1C2E2F8500599CAD /* JSCustomColors.swift */; };
 		9E70F7541BD5DDE90017F92B /* JSMainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E70F7531BD5DDE90017F92B /* JSMainMenuViewController.swift */; };
 		9E7B0F5D1C27BADE0070FAF3 /* JSSpaceship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7B0F5C1C27BADE0070FAF3 /* JSSpaceship.swift */; };
@@ -40,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		9E2380FC1D8852F700F4BBF5 /* JSAsteroid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSAsteroid.swift; sourceTree = "<group>"; };
+		9E2802011D888D5F003E2976 /* asteroid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = asteroid.png; sourceTree = "<group>"; };
 		9E2F6A4A1C2E2F8500599CAD /* JSCustomColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSCustomColors.swift; sourceTree = "<group>"; };
 		9E70F7531BD5DDE90017F92B /* JSMainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSMainMenuViewController.swift; sourceTree = "<group>"; };
 		9E7B0F5C1C27BADE0070FAF3 /* JSSpaceship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSSpaceship.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 		9E8AB48B1B1E917200DFF844 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				9E2802011D888D5F003E2976 /* asteroid.png */,
 				9EFD19E11C2A050B00BEEECC /* start.png */,
 				9E7B0F5E1C27BBEE0070FAF3 /* speedship.png */,
 				9EF0018A1C29201500C1361F /* space.jpg */,
@@ -254,6 +257,7 @@
 				9E8BE49B1B5F01DD00FCA156 /* bg_music.mp3 in Resources */,
 				9EF0018B1C29201500C1361F /* space.jpg in Resources */,
 				9EF001891C29200600C1361F /* game_bg.jpg in Resources */,
+				9E2802021D888D5F003E2976 /* asteroid.png in Resources */,
 				9EFD19E21C2A050B00BEEECC /* start.png in Resources */,
 				9E8AB4731B1E8F5300DFF844 /* Images.xcassets in Resources */,
 				9E8BE49D1B5F05E500FCA156 /* game_over.mp3 in Resources */,

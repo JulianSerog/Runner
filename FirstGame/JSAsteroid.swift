@@ -10,9 +10,24 @@ import SpriteKit
 
 class JSAsteroid: SKSpriteNode {
     
+    var xSpeed : Double = -15.0
+    
     init(scene: GameScene) {
-        super.init(texture: nil, color: SKColor.cyanColor(), size: CGSizeMake(scene.frame.width * 0.1, scene.frame.height * 0.1))
+        let texture = SKTexture(imageNamed: "asteroid.png")
+        super.init(texture: texture, color: UIColor.clearColor(), size: CGSizeMake(scene.frame.width * 0.1, scene.frame.width * 0.1))
         position = CGPointMake(scene.frame.width * 0.9, scene.frame.height * 0.5)
+        physicsBody = SKPhysicsBody(texture: texture, size: self.size)
+        //physics setup
+        physicsBody?.affectedByGravity = false
+        physicsBody?.categoryBitMask = 0x1 << 1
+        physicsBody?.contactTestBitMask = 0x1 << 0
+    }
+    
+    func move() {
+        //SKTransition.moveInWithDirection(.Left, duration: 5.0)
+        print("asteroid moved")
+        self.physicsBody?.applyImpulse(CGVector.init(dx: xSpeed, dy: 0.0))
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

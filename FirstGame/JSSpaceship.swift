@@ -18,7 +18,8 @@ class ESSpaceship: SKSpriteNode {
     {
         let texture = SKTexture(imageNamed: "speedship.png")
         super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
-        
+        //setup physics
+        physicsBody?.categoryBitMask = 0x1 << 0
     }//initializer
     
     

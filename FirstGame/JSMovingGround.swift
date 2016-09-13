@@ -22,11 +22,10 @@ class JSMovingGround: SKSpriteNode
     let COLOR_TWO = UIColor.redColor()
     
     //constructor
-    init(size: CGSize)
-    {
+    init(size: CGSize) {
         super.init(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(size.width*2, size.height))
         anchorPoint = CGPointMake(0, 0)
-        
+        //Segment setup
         for i in 0 ..< NUMBER_OF_SEGMENTS
         {
             //the explanation point basically means that we promise we are going to initialize this color later on
@@ -43,6 +42,10 @@ class JSMovingGround: SKSpriteNode
             segment.position = CGPointMake(CGFloat(i)*segment.size.width, 0)
             addChild(segment)
         }//for
+        
+        //physics setup
+        physicsBody?.categoryBitMask = 0x1 << 1
+        physicsBody?.contactTestBitMask = 0x1 << 0
     }//initializer/constructor
     
     
