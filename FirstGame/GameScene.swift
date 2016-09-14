@@ -21,10 +21,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var isHit = false
     var bg : SKSpriteNode!
     var pause = false
-    var asteroid : JSAsteroid!
+    
     
     //timer for keeping score & increasing difficulty
-    let timer : Timer = Timer()
+    var timer : Timer = Timer()
     var timer_value = 0
     
     //array of asteroids
@@ -65,7 +65,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     
-    //MARK: playBackgroundMusic
+    // playBackgroundMusic
     func playBackgroundMusic(_ filename: String) {
         let url = Bundle.main.url(forResource: filename, withExtension: nil)
         if(url == nil)
@@ -111,12 +111,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         movingGround.physicsBody?.contactTestBitMask = 0x1 << 0
         movingCieling.physicsBody?.categoryBitMask = 0x1 << 1
         movingCieling.physicsBody?.contactTestBitMask = 0x1 << 0
-
-
     }//addPhysicsToWorld
     
 
-    //MARK: blink animation
+    // blink animation for label
     func blinkAnimation() -> SKAction {
         let duration  = 0.6
         let fadeOut = SKAction.fadeAlpha(to: 0.0, duration: duration)
@@ -125,8 +123,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return SKAction.repeatForever(blink)
     }//blinkAnimation
     
-    
-    //MARK: add elementsAndUI
+    // add elements and set up game
     func addElementsAndUI() {
         //add background -- background added through sprite
         bg = SKSpriteNode(imageNamed: "game_bg.jpg")
@@ -158,8 +155,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         movingCieling.position = CGPoint(x: 0, y: view!.frame.height - movingCieling.frame.height)
         
         //TODO: asteroid
-        asteroid = JSAsteroid(scene: self)
-        
+        //asteroid = JSAsteroid(scene: self, position: CGPoint(x: (scene?.frame.width)! * 0.9, y: (scene?.frame.height)! * 0.7))
+        asteroids.add(JSAsteroid(scene: self, position: CGPoint(x: (scene?.frame.width)! * 0.9, y: (scene?.frame.height)! * 0.7)))
         //physics
         addPhysicsToWorld()
         
@@ -176,7 +173,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(label)
         addChild(player)
         addChild(movingCieling)
-        addChild(asteroid)
+        addChild(asteroids[0] as! SKNode)
         view!.addSubview(pauseButton)
     }//addElementsAndUI
     
@@ -184,17 +181,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //MARK: touches began
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         /* Called when a touch begins */
-        
         //increment touch counter every time screen is touched
         counter += 1
         //things to do on first touch
         if counter == 1 {
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(GameScene.incrementTime), userInfo: nil, repeats: true)
+            
+            print("timer: \(timer)")
+            
             //adding the physics body here makes it so that the player doesn't automatically drop when the view starts
             player.physicsBody = SKPhysicsBody(texture: player.texture!, size: player.size)
             player.physicsBody?.isDynamic = true
             player.physicsBody?.allowsRotation = true
             label.isHidden = true
-            asteroid.move()
+            //move all asteroids, should only be 1 at touches == 1
+            for asteroid in asteroids {
+                (asteroid as! JSAsteroid).move()
+            }
         }//if
         if counter > 1 {
             player.physicsBody?.velocity = CGVector(dx: 0.0, dy: 0.0)
@@ -206,6 +209,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //MARK: update
     override func update(_ currentTime: TimeInterval) {
         /* Called before each frame is rendered */
+        //print("current time: \(timer_value)")
+        /*
+        if currentTime > 3000 {
+            asteroids.add(JSAsteroid(scene: self, position: CGPoint(x: (scene?.frame.width)! * 0.9, y: (scene?.frame.height)! * 0.3)))
+            addChild((asteroids[1] as! JSAsteroid))
+            (asteroids[1] as! JSAsteroid).move()
+        }
+        */
+        for asteroid in asteroids {
+            (asteroid as! JSAsteroid).resetPos(scene: self)
+        }
     }//update
     
     
@@ -215,7 +229,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             isHit = true
             backgroundMusicPlayer.stop()
             playBackgroundMusic("game_over.mp3")
-            sleep(1) //TODO: try to find out why physics gravity and speed don't wait for the timer
+            //sleep(1) //TODO: try to find out why physics gravity and speed doesn't wait for the timer
             print("A collision occured between two objects")
             physicsWorld.gravity = CGVector.zero
             physicsWorld.speed = 0.0
@@ -245,6 +259,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             //self.view!.window!.rootViewController!.performSegueWithIdentifier("toMainMenu", sender: self)
         }
     }//pauseButtonPressed
+    
+    //MARK: timer triggers this function, this is where extra asteroids get created and difficulty increases over time
+    func incrementTime() {
+        timer_value += 1
+        if(timer_value == 5) {
+            asteroids.add(JSAsteroid(scene: self, position: CGPoint(x: (scene?.frame.width)! * 0.9, y: (scene?.frame.height)! * 0.3)))
+            addChild((asteroids[1] as! JSAsteroid))
+            (asteroids[1] as! JSAsteroid).move()
+        } else if (timer_value == 10) {
+            asteroids.add(JSAsteroid(scene: self, position: CGPoint(x: (scene?.frame.width)! * 0.9, y: (scene?.frame.height)! * 0.5)))
+            addChild((asteroids[2] as! JSAsteroid))
+            (asteroids[2] as! JSAsteroid).move()
+        }//else if
+    }//incrementTime
+    
+    
 }//class
 
 

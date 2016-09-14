@@ -23,9 +23,11 @@ class JSMovingGround: SKSpriteNode
     
     //constructor
     init(size: CGSize) {
-        super.init(texture: nil, color: UIColor.clear, size: CGSize(width: size.width*2, height: size.height))
+        let texture = SKTexture(imageNamed: "ground.png")
+        super.init(texture: texture, color: UIColor.clear, size: CGSize(width: size.width*2, height: size.height))
         anchorPoint = CGPoint(x: 0, y: 0)
         //Segment setup
+        /*
         for i in 0 ..< NUMBER_OF_SEGMENTS
         {
             //the explanation point basically means that we promise we are going to initialize this color later on
@@ -42,7 +44,7 @@ class JSMovingGround: SKSpriteNode
             segment.position = CGPoint(x: CGFloat(i)*segment.size.width, y: 0)
             addChild(segment)
         }//for
-        
+        */
         
     }//initializer/constructor
     
