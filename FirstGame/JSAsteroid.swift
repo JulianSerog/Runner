@@ -14,8 +14,8 @@ class JSAsteroid: SKSpriteNode {
     
     init(scene: GameScene) {
         let texture = SKTexture(imageNamed: "asteroid.png")
-        super.init(texture: texture, color: UIColor.clearColor(), size: CGSizeMake(scene.frame.width * 0.1, scene.frame.width * 0.1))
-        position = CGPointMake(scene.frame.width * 0.9, scene.frame.height * 0.5)
+        super.init(texture: texture, color: UIColor.clear, size: CGSize(width: scene.frame.width * 0.1, height: scene.frame.width * 0.1))
+        position = CGPoint(x: scene.frame.width * 0.9, y: scene.frame.height * 0.5)
         physicsBody = SKPhysicsBody(texture: texture, size: self.size)
         //physics setup
         physicsBody?.affectedByGravity = false

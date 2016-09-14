@@ -17,13 +17,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var backgroundMusicPlayer : AVAudioPlayer!
     var PLAYER_STARTING_POINT : CGPoint!
     var isStarted = false
-    let pauseButton: UIButton = UIButton(type: UIButtonType.Custom)
+    let pauseButton: UIButton = UIButton(type: UIButtonType.custom)
     var isHit = false
     var bg : SKSpriteNode!
     var pause = false
     var asteroid : JSAsteroid!
-    let timer : NSTimer = NSTimer()
+    
+    //timer for keeping score & increasing difficulty
+    let timer : Timer = Timer()
     var timer_value = 0
+    
+    //array of asteroids
+    let asteroids : NSMutableArray = NSMutableArray()
     
     
     
@@ -38,16 +43,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     //START SCENE
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         
         //play background music
         playBackgroundMusic("bg_music.mp3")
-        backgroundColor = UIColor.clearColor() //TODO: maybe add an image to the background to give it a space feel
-        addElementsAndUI()
+        backgroundColor = UIColor.clear //TODO: maybe add an image to the background to give it a space feel
+        
         
         
         //MARK: setup world physics
         physicsWorld.contactDelegate = self
+        addElementsAndUI()
     }//didMoveToView
     
     
@@ -60,8 +66,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     //MARK: playBackgroundMusic
-    func playBackgroundMusic(filename: String) {
-        let url = NSBundle.mainBundle().URLForResource(filename, withExtension: nil)
+    func playBackgroundMusic(_ filename: String) {
+        let url = Bundle.main.url(forResource: filename, withExtension: nil)
         if(url == nil)
         {
             print("Could not find file: \(filename)")
@@ -71,7 +77,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //below is an example of the new try catch in swift 2!
         do {
-            try backgroundMusicPlayer = AVAudioPlayer(contentsOfURL: url!)
+            try backgroundMusicPlayer = AVAudioPlayer(contentsOf: url!)
         } catch {
             print("Could not create audio player")
         }//catch
@@ -90,14 +96,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //MARK: addPhysicsToWorld
     func addPhysicsToWorld() {
-        
         //add physics to world
-        self.physicsWorld.gravity = CGVectorMake(0, -3.5)
+        self.physicsWorld.gravity = CGVector(dx: 0, dy: -3.5)
         //addphysics to moving ground
-        movingGround.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(view!.frame.width, movingGround.size.height * 2))
-        movingGround.physicsBody?.dynamic = false
-        movingCieling.physicsBody = SKPhysicsBody(rectangleOfSize: CGSizeMake(view!.frame.width, movingCieling.size.height/2))
-        movingCieling.physicsBody?.dynamic = false
+        movingGround.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: view!.frame.width, height: movingGround.size.height * 2))
+        movingGround.physicsBody?.isDynamic = false
+        movingCieling.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: view!.frame.width, height: movingCieling.size.height/2))
+        movingCieling.physicsBody?.isDynamic = false
+        
+        //add physics to ground and cieling
+        //physics setup
+        //TODO: find out why this doesn't work in class
+        movingGround.physicsBody?.categoryBitMask = 0x1 << 1
+        movingGround.physicsBody?.contactTestBitMask = 0x1 << 0
+        movingCieling.physicsBody?.categoryBitMask = 0x1 << 1
+        movingCieling.physicsBody?.contactTestBitMask = 0x1 << 0
+
 
     }//addPhysicsToWorld
     
@@ -105,10 +119,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //MARK: blink animation
     func blinkAnimation() -> SKAction {
         let duration  = 0.6
-        let fadeOut = SKAction.fadeAlphaTo(0.0, duration: duration)
-        let fadeIn = SKAction.fadeAlphaTo(1.0, duration: duration)
+        let fadeOut = SKAction.fadeAlpha(to: 0.0, duration: duration)
+        let fadeIn = SKAction.fadeAlpha(to: 1.0, duration: duration)
         let blink = SKAction.sequence([fadeOut, fadeIn])
-        return SKAction.repeatActionForever(blink)
+        return SKAction.repeatForever(blink)
     }//blinkAnimation
     
     
@@ -117,31 +131,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //add background -- background added through sprite
         bg = SKSpriteNode(imageNamed: "game_bg.jpg")
         bg.size = CGSize(width: view!.frame.width, height:( view?.frame.height)!)
-        bg.position = CGPointMake((view?.frame.width)!/2, view!.frame.height/2)
+        bg.position = CGPoint(x: (view?.frame.width)!/2, y: view!.frame.height/2)
         
         //pause button
-        pauseButton.frame = CGRectMake((scene?.frame.width)! - (scene?.frame.width)! * 0.20, view!.frame.height - (view?.frame.height)! * 0.06, view!.frame.width * 0.20, view!.frame.height * 0.06)
-        pauseButton.backgroundColor = UIColor.whiteColor()
-        pauseButton.titleLabel?.textAlignment = NSTextAlignment.Center
-        pauseButton.titleLabel?.textAlignment = NSTextAlignment.Center
-        pauseButton.setTitle("pause", forState: UIControlState.Normal)
-        pauseButton.tintColor = UIColor.clearColor()
-        pauseButton.addTarget(self, action: #selector(GameScene.pauseButtonPressed), forControlEvents: UIControlEvents.TouchUpInside)
-        pauseButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        pauseButton.frame = CGRect(x: (scene?.frame.width)! - (scene?.frame.width)! * 0.20, y: view!.frame.height - (view?.frame.height)! * 0.06, width: view!.frame.width * 0.20, height: view!.frame.height * 0.06)
+        pauseButton.backgroundColor = UIColor.white
+        pauseButton.titleLabel?.textAlignment = NSTextAlignment.center
+        pauseButton.titleLabel?.textAlignment = NSTextAlignment.center
+        pauseButton.setTitle("pause", for: UIControlState())
+        pauseButton.tintColor = UIColor.clear
+        pauseButton.addTarget(self, action: #selector(GameScene.pauseButtonPressed), for: UIControlEvents.touchUpInside)
+        pauseButton.setTitleColor(UIColor.black, for: UIControlState())
 
         
         //create and position the player right above the ground
         player = ESSpaceship()
-        player.position = CGPointMake(70, view!.frame.height/2.0 /*- player.frame.size.height/2*/)
+        player.position = CGPoint(x: 70, y: view!.frame.height/2.0 /*- player.frame.size.height/2*/)
         PLAYER_STARTING_POINT = player.position
         
         //ground and ceiling
-        movingGround = JSMovingGround(size: CGSizeMake(view!.frame.width, 20))
-        movingCieling = JSMovingGround(size: CGSizeMake(view!.frame.width, view!.frame.height/15))
+        movingGround = JSMovingGround(size: CGSize(width: view!.frame.width, height: 20))
+        movingCieling = JSMovingGround(size: CGSize(width: view!.frame.width, height: view!.frame.height/15))
         
         //set the position of the ground
-        movingGround.position = CGPointMake(0, 0)
-        movingCieling.position = CGPointMake(0, view!.frame.height - movingCieling.frame.height)
+        movingGround.position = CGPoint(x: 0, y: 0)
+        movingCieling.position = CGPoint(x: 0, y: view!.frame.height - movingCieling.frame.height)
         
         //TODO: asteroid
         asteroid = JSAsteroid(scene: self)
@@ -153,8 +167,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         label.position.x = view!.center.x
         label.position.y = view!.center.y
         label.fontName = "TimesNewRomanPS-BoldItalicMT"
-        label.fontColor = UIColor.whiteColor()
-        label.runAction(blinkAnimation()) //runs the blink animation forever
+        label.fontColor = UIColor.white
+        label.run(blinkAnimation()) //runs the blink animation forever
 
         //add the objects to the scene
         addChild(bg) //set to first so it is in the back of the view
@@ -168,7 +182,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     
     //MARK: touches began
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         /* Called when a touch begins */
         
         //increment touch counter every time screen is touched
@@ -177,26 +191,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if counter == 1 {
             //adding the physics body here makes it so that the player doesn't automatically drop when the view starts
             player.physicsBody = SKPhysicsBody(texture: player.texture!, size: player.size)
-            player.physicsBody?.dynamic = true
+            player.physicsBody?.isDynamic = true
             player.physicsBody?.allowsRotation = true
-            label.hidden = true
+            label.isHidden = true
             asteroid.move()
         }//if
         if counter > 1 {
-            player.physicsBody?.velocity = CGVectorMake(0.0, 0.0)
-            player.physicsBody?.applyImpulse(CGVectorMake(0, 15))
+            player.physicsBody?.velocity = CGVector(dx: 0.0, dy: 0.0)
+            player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 15))
         }//if
     }//touches began function
     
     
     //MARK: update
-    override func update(currentTime: CFTimeInterval) {
+    override func update(_ currentTime: TimeInterval) {
         /* Called before each frame is rendered */
     }//update
     
     
     //MARK: did Begin Contact
-    func didBeginContact(contact: SKPhysicsContact) {
+    func didBegin(_ contact: SKPhysicsContact) {
         if isHit != true {
             isHit = true
             backgroundMusicPlayer.stop()
@@ -210,8 +224,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }//if
     }//didBeginContact
     
-    
-    
+
     //TODO: find out why segue isn't performing
     //MARK: pause button pressed
     func pauseButtonPressed() {
@@ -220,11 +233,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             print(physicsWorld.speed) //to find current speed
             physicsWorld.speed = 0.0
             //performSegueWithIdentifier("toMainMenu", sender: self) //not available in SKScene
-            pauseButton.setTitle("resume", forState: .Normal)
+            pauseButton.setTitle("resume", for: UIControlState())
             print("entered pause, pause var is now:   \(pause)")
         } else if (pause == true && isHit == false) {
             pause = false
-            pauseButton.setTitle("pause", forState: .Normal)
+            pauseButton.setTitle("pause", for: UIControlState())
             physicsWorld.speed = 1.0 //resumes game
         } else if (pause == false && isHit == true) {
             print("button pressed and is hit is true")

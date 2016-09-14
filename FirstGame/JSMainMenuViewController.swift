@@ -12,14 +12,14 @@ class JSMainMenuViewController: UIViewController
 {
     
     //create variables and constants
-    let startButton = UIButton(type: UIButtonType.Custom) //make custom instead of system because button will be blue
+    let startButton = UIButton(type: UIButtonType.custom) //make custom instead of system because button will be blue
     let titleLabel = UILabel()
     let backgroundImage = UIImageView()
     let buttonImage = UIImage(named: "start.png")
     //var isStarted: Bool = false
     
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         addUI()
     }//viewWillAppear
@@ -29,29 +29,29 @@ class JSMainMenuViewController: UIViewController
         
         // 1) bg image
         backgroundImage.image = UIImage(named: "space.jpg")
-        backgroundImage.contentMode = UIViewContentMode.ScaleAspectFill
-        backgroundImage.frame = CGRectMake(0, 0, view.frame.width, view.frame.height)
+        backgroundImage.contentMode = UIViewContentMode.scaleAspectFill
+        backgroundImage.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         backgroundImage.alpha = 1.0
         
         // 2)Game Title
         titleLabel.text = "Star Racer"
-        titleLabel.frame = CGRectMake(0, 0, view.frame.width, view.frame.height * 0.20)
-        titleLabel.textAlignment = NSTextAlignment.Center
-        titleLabel.textColor = UIColor.whiteColor()
+        titleLabel.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height * 0.20)
+        titleLabel.textAlignment = NSTextAlignment.center
+        titleLabel.textColor = UIColor.white
         //titleLabel.backgroundColor = UIColor.clearColor()
         
         // 3)start button
-        startButton.setImage(buttonImage, forState: UIControlState.Normal)
-        startButton.frame = CGRectMake(view.frame.width/2 - view.frame.width * 0.15, view.frame.height/2 - view.frame.height * 0.15, view.frame.width * 0.30, view.frame.height * 0.30)
-        startButton.addTarget(self, action: #selector(JSMainMenuViewController.startButtonPressed), forControlEvents: UIControlEvents.TouchUpInside)
-        startButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
+        startButton.setImage(buttonImage, for: UIControlState())
+        startButton.frame = CGRect(x: view.frame.width/2 - view.frame.width * 0.15, y: view.frame.height/2 - view.frame.height * 0.15, width: view.frame.width * 0.30, height: view.frame.height * 0.30)
+        startButton.addTarget(self, action: #selector(JSMainMenuViewController.startButtonPressed), for: UIControlEvents.touchUpInside)
+        startButton.setTitleColor(UIColor.black, for: UIControlState())
         
         
         
         view.addSubview(titleLabel)
         view.addSubview(startButton)
         view.addSubview(backgroundImage)
-        view.sendSubviewToBack(backgroundImage)
+        view.sendSubview(toBack: backgroundImage)
 
         
     }//addUI
@@ -67,7 +67,7 @@ class JSMainMenuViewController: UIViewController
             isStarted = true
         }//if
         */
-        performSegueWithIdentifier("toGame", sender: self)
+        performSegue(withIdentifier: "toGame", sender: self)
         
         
     }

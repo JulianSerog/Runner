@@ -17,7 +17,7 @@ class ESSpaceship: SKSpriteNode {
     init()
     {
         let texture = SKTexture(imageNamed: "speedship.png")
-        super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
+        super.init(texture: texture, color: UIColor.clear, size: texture.size())
         //setup physics
         physicsBody?.categoryBitMask = 0x1 << 0
     }//initializer
@@ -26,13 +26,13 @@ class ESSpaceship: SKSpriteNode {
     
     
     
-    func jump(var1: CGFloat)
+    func jump(_ var1: CGFloat)
     {
         //add if statement for jump checking in the start touches method
-        let moveUp = SKAction.moveByX(0, y: var1, duration: 0.35);
-        let moveDown = SKAction.moveByX(0, y: -1 * var1, duration: 0.175);
+        let moveUp = SKAction.moveBy(x: 0, y: var1, duration: 0.35);
+        let moveDown = SKAction.moveBy(x: 0, y: -1 * var1, duration: 0.175);
         let jumpSequence = SKAction.sequence([moveUp, moveDown])
-        self.runAction(jumpSequence)
+        self.run(jumpSequence)
         print("Player jumped")
         
     }//jump

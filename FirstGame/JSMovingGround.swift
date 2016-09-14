@@ -18,13 +18,13 @@ class JSMovingGround: SKSpriteNode
 {
     //declare constants
     let NUMBER_OF_SEGMENTS = 20
-    let COLOR_ONE = UIColor.redColor()
-    let COLOR_TWO = UIColor.redColor()
+    let COLOR_ONE = UIColor.red
+    let COLOR_TWO = UIColor.red
     
     //constructor
     init(size: CGSize) {
-        super.init(texture: nil, color: UIColor.clearColor(), size: CGSizeMake(size.width*2, size.height))
-        anchorPoint = CGPointMake(0, 0)
+        super.init(texture: nil, color: UIColor.clear, size: CGSize(width: size.width*2, height: size.height))
+        anchorPoint = CGPoint(x: 0, y: 0)
         //Segment setup
         for i in 0 ..< NUMBER_OF_SEGMENTS
         {
@@ -37,23 +37,21 @@ class JSMovingGround: SKSpriteNode
                 segmentColor = COLOR_TWO
             }//else
             
-            let segment = SKSpriteNode(color:segmentColor, size: CGSizeMake(self.size.width / CGFloat(NUMBER_OF_SEGMENTS), self.size.height ))
-            segment.anchorPoint = CGPointMake(0.0, 0)
-            segment.position = CGPointMake(CGFloat(i)*segment.size.width, 0)
+            let segment = SKSpriteNode(color:segmentColor, size: CGSize(width: self.size.width / CGFloat(NUMBER_OF_SEGMENTS), height: self.size.height ))
+            segment.anchorPoint = CGPoint(x: 0.0, y: 0)
+            segment.position = CGPoint(x: CGFloat(i)*segment.size.width, y: 0)
             addChild(segment)
         }//for
         
-        //physics setup
-        physicsBody?.categoryBitMask = 0x1 << 1
-        physicsBody?.contactTestBitMask = 0x1 << 0
+        
     }//initializer/constructor
     
     
     func start(){
-        let resetPosition = SKAction.moveToX(0, duration: 0)
-        let moveLeft = SKAction.moveByX(-frame.size.width/2, y: 0, duration: 1.0)
+        let resetPosition = SKAction.moveTo(x: 0, duration: 0)
+        let moveLeft = SKAction.moveBy(x: -frame.size.width/2, y: 0, duration: 1.0)
         let moveSequence = SKAction.sequence([moveLeft,resetPosition])
-        runAction(SKAction.repeatActionForever(moveSequence))
+        run(SKAction.repeatForever(moveSequence))
     }
     
     func stop()
