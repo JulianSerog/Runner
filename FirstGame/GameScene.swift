@@ -22,6 +22,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var bg : SKSpriteNode!
     var pause = false
     
+    let pauseImage = UIImage(named: "pause.png")
+    let playImage = UIImage(named: "play.png")
+    
     
     //timer for keeping score & increasing difficulty
     var timer : Timer = Timer()
@@ -131,11 +134,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bg.position = CGPoint(x: (view?.frame.width)!/2, y: view!.frame.height/2)
         
         //pause button
-        pauseButton.frame = CGRect(x: (scene?.frame.width)! - (scene?.frame.width)! * 0.20, y: view!.frame.height - (view?.frame.height)! * 0.06, width: view!.frame.width * 0.20, height: view!.frame.height * 0.06)
+        pauseButton.frame = CGRect(x: (scene?.frame.width)! - (scene?.frame.width)! * 0.075, y: view!.frame.height - (view?.frame.height)! * 0.15, width: view!.frame.height * 0.08, height: view!.frame.height * 0.08)
+        
+        //make button circular
+        pauseButton.layer.cornerRadius = 0.5 * pauseButton.bounds.size.width
+        pauseButton.clipsToBounds = true
+        
         pauseButton.backgroundColor = UIColor.white
-        pauseButton.titleLabel?.textAlignment = NSTextAlignment.center
-        pauseButton.titleLabel?.textAlignment = NSTextAlignment.center
-        pauseButton.setTitle("pause", for: UIControlState())
+        //pauseButton.setTitle("||", for: UIControlState())
+        pauseButton.setBackgroundImage(pauseImage, for: .normal)
         pauseButton.tintColor = UIColor.clear
         pauseButton.addTarget(self, action: #selector(GameScene.pauseButtonPressed), for: UIControlEvents.touchUpInside)
         pauseButton.setTitleColor(UIColor.black, for: UIControlState())
@@ -247,11 +254,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             print(physicsWorld.speed) //to find current speed
             physicsWorld.speed = 0.0
             //performSegueWithIdentifier("toMainMenu", sender: self) //not available in SKScene
-            pauseButton.setTitle("resume", for: UIControlState())
+            pauseButton.setBackgroundImage(playImage, for: .normal)
             print("entered pause, pause var is now:   \(pause)")
         } else if (pause == true && isHit == false) {
             pause = false
-            pauseButton.setTitle("pause", for: UIControlState())
+            pauseButton.setBackgroundImage(pauseImage, for: .normal)
             physicsWorld.speed = 1.0 //resumes game
         } else if (pause == false && isHit == true) {
             print("button pressed and is hit is true")
