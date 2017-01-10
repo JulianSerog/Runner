@@ -33,8 +33,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //array of asteroids
     let asteroids : NSMutableArray = NSMutableArray()
     
-    
-    
+    //TODO: change to gamescene?
     var viewController: UIViewController?
     
     //starting message
@@ -163,7 +162,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //TODO: asteroid
         //asteroid = JSAsteroid(scene: self, position: CGPoint(x: (scene?.frame.width)! * 0.9, y: (scene?.frame.height)! * 0.7))
-        asteroids.add(JSAsteroid(scene: self, position: CGPoint(x: (scene?.frame.width)! * 0.9, y: (scene?.frame.height)! * 0.7)))
+        asteroids.add(JSAsteroid(scene: self, position: CGPoint(x: (scene?.frame.width)! + (scene?.frame.width)! * 0.1/*asteriod width*/, y: (scene?.frame.height)! * 0.7)))
         //physics
         addPhysicsToWorld()
         
@@ -242,6 +241,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             physicsWorld.speed = 0.0
             pauseButton.titleLabel?.text = "replay"
             
+            //halt all asteriods
+            for asteriod in asteroids {
+                (asteriod as! JSAsteroid).stop()
+            }
+            
         }//if
     }//didBeginContact
     
@@ -255,9 +259,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             physicsWorld.speed = 0.0
             //performSegueWithIdentifier("toMainMenu", sender: self) //not available in SKScene
             pauseButton.setBackgroundImage(playImage, for: .normal)
+            
+            //halt all asteriods
+            for asteriod in asteroids {
+                (asteriod as! JSAsteroid).stop()
+            }
+            
             print("entered pause, pause var is now:   \(pause)")
         } else if (pause == true && isHit == false) {
             pause = false
+            
+            //resume asteriods
+            for asteriod in asteroids {
+                (asteriod as! JSAsteroid).resume()
+            }
+            
             pauseButton.setBackgroundImage(pauseImage, for: .normal)
             physicsWorld.speed = 1.0 //resumes game
         } else if (pause == false && isHit == true) {
@@ -269,16 +285,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //MARK: timer triggers this function, this is where extra asteroids get created and difficulty increases over time
     func incrementTime() {
-        timer_value += 1
-        if(timer_value == 5) {
-            asteroids.add(JSAsteroid(scene: self, position: CGPoint(x: (scene?.frame.width)! * 0.9, y: (scene?.frame.height)! * 0.3)))
-            addChild((asteroids[1] as! JSAsteroid))
-            (asteroids[1] as! JSAsteroid).move()
-        } else if (timer_value == 10) {
-            asteroids.add(JSAsteroid(scene: self, position: CGPoint(x: (scene?.frame.width)! * 0.9, y: (scene?.frame.height)! * 0.5)))
-            addChild((asteroids[2] as! JSAsteroid))
-            (asteroids[2] as! JSAsteroid).move()
-        }//else if
+        if(!pause) {
+            timer_value += 1
+            if(timer_value == 5) {
+                asteroids.add(JSAsteroid(scene: self, position: CGPoint(x: (scene?.frame.width)! + (scene?.frame.width)! * 0.1/*asteriod width*/, y: (scene?.frame.height)! * 0.3)))
+                addChild((asteroids[1] as! JSAsteroid))
+                (asteroids[1] as! JSAsteroid).move()
+            } else if (timer_value == 10) {
+                asteroids.add(JSAsteroid(scene: self, position: CGPoint(x: (scene?.frame.width)! + (scene?.frame.width)! * 0.1/*asteriod width*/, y: (scene?.frame.height)! * 0.5)))
+                addChild((asteroids[2] as! JSAsteroid))
+                (asteroids[2] as! JSAsteroid).move()
+            }//else if
+        }//if not pause
     }//incrementTime
     
     

@@ -10,7 +10,9 @@ import SpriteKit
 
 class JSAsteroid: SKSpriteNode {
     
-    var xSpeed : Double = -15.0
+    var xSpeed : Double = 15.0
+    var moveLeft: SKAction!
+    
     
     init(scene: GameScene, position: CGPoint) {
         let texture = SKTexture(imageNamed: "asteroid.png")
@@ -21,16 +23,31 @@ class JSAsteroid: SKSpriteNode {
         physicsBody?.affectedByGravity = false
         physicsBody?.categoryBitMask = 0x1 << 1
         physicsBody?.contactTestBitMask = 0x1 << 0
+        
+        
+        moveLeft = SKAction.moveBy(x: -1.2 * scene.frame.width, y:0, duration:xSpeed)
     }
     
     func move() {
         print("asteroid moved")
-        self.physicsBody?.applyImpulse(CGVector.init(dx: xSpeed, dy: 0.0))
+        //self.physicsBody?.applyImpulse(CGVector.init(dx: xSpeed, dy: 0.0))
+        self.run(moveLeft)
+    }
+    
+    func stop() {
+        self.removeAllActions()
+        
+    }
+    
+    func resume() {
+        //TODO: implement
+        self.move()
     }
     
     func resetPos(scene: GameScene) {
         if(position.x + size.width < 0) {
             position.x = scene.frame.width
+            stop()
             move() //TODO: temporary, make speed constant with slow updates to speed
         }//if
     }//resetPos
