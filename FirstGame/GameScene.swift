@@ -17,17 +17,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var backgroundMusicPlayer : AVAudioPlayer!
     var PLAYER_STARTING_POINT : CGPoint!
     var isStarted = false
-    let pauseButton: UIButton = UIButton(type: UIButtonType.custom)
+    let pauseButton: UIButton = UIButton(type: .custom)
+    let replayButton: UIButton = UIButton(type: .custom)
     var isHit = false
     var bg : SKSpriteNode!
     var pause = false
     
     let pauseImage = UIImage(named: "pause.png")
+    let replayImage = UIImage(named: "restart.png")
     let playImage = UIImage(named: "play.png")
     
     
     //timer for keeping score & increasing difficulty
-    var timer : Timer = Timer()
+    var timer : Timer!
     var timer_value = 0
     
     //array of asteroids
@@ -92,7 +94,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //TODO: finish this method
     func reset() {
-        player.position = PLAYER_STARTING_POINT
+        backgroundMusicPlayer.stop()
+        replayButton.isHidden = true
+        let gameScene = GameScene(size: self.size)
+        let transition = SKTransition.doorsCloseHorizontal(withDuration: 0.5)
+        gameScene.scaleMode = SKSceneScaleMode.aspectFill
+        self.scene!.view?.presentScene(gameScene, transition: transition)
     }//reset
     
     
@@ -140,11 +147,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pauseButton.clipsToBounds = true
         
         pauseButton.backgroundColor = UIColor.white
-        //pauseButton.setTitle("||", for: UIControlState())
         pauseButton.setBackgroundImage(pauseImage, for: .normal)
         pauseButton.tintColor = UIColor.clear
         pauseButton.addTarget(self, action: #selector(GameScene.pauseButtonPressed), for: UIControlEvents.touchUpInside)
         pauseButton.setTitleColor(UIColor.black, for: UIControlState())
+        
+        
+        replayButton.frame = CGRect(x: (scene?.frame.width)! - (scene?.frame.width)! * 0.075, y: view!.frame.height - (view?.frame.height)! * 0.25, width: view!.frame.height * 0.08, height: view!.frame.height * 0.08)
+        replayButton.layer.cornerRadius = 0.5 * replayButton.bounds.size.width
+        replayButton.backgroundColor = UIColor.white
+        replayButton.setBackgroundImage(replayImage, for: .normal)
+        replayButton.setTitleColor(UIColor.black, for: UIControlState())
+        replayButton.addTarget(self, action: #selector(self.reset), for: .touchUpInside)
+        replayButton.tintColor = UIColor.clear
+
 
         
         //create and position the player right above the ground
@@ -233,13 +249,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         if isHit != true {
             isHit = true
+            
             backgroundMusicPlayer.stop()
             playBackgroundMusic("game_over.mp3")
-            //sleep(1) //TODO: try to find out why physics gravity and speed doesn't wait for the timer
-            print("A collision occured between two objects")
+            //show replay button
+            view?.addSubview(replayButton)
             physicsWorld.gravity = CGVector.zero
             physicsWorld.speed = 0.0
-            pauseButton.titleLabel?.text = "replay"
+            
+            //label
+            let failureLabel = SKLabelNode(text: "You failed!")
+            failureLabel.position.x = view!.center.x
+            failureLabel.position.y = view!.center.y
+            failureLabel.fontName = "TimesNewRomanPS-BoldItalicMT"
+            failureLabel.fontColor = UIColor.red
+            addChild(failureLabel)
+            failureLabel.run(blinkAnimation()) //runs the blink animation forever
+            
+            let restart = SKNode() //TODO: change restart button to node
+            
+            
             
             //halt all asteriods
             for asteriod in asteroids {
@@ -285,7 +314,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //MARK: timer triggers this function, this is where extra asteroids get created and difficulty increases over time
     func incrementTime() {
-        if(!pause) {
+        //only increments the timer when the game is not paused and the player is not hit
+        if(!pause && !isHit) {
             timer_value += 1
             if(timer_value == 5) {
                 asteroids.add(JSAsteroid(scene: self, position: CGPoint(x: (scene?.frame.width)! + (scene?.frame.width)! * 0.1/*asteriod width*/, y: (scene?.frame.height)! * 0.3)))
