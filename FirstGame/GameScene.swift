@@ -24,13 +24,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var pause = false
     
     let pauseImage = UIImage(named: "pause.png")
-    let replayImage = UIImage(named: "restart.png")
+    let replayImage = UIImage(named: "reset.png")
     let playImage = UIImage(named: "play.png")
+    
     
     
     //timer for keeping score & increasing difficulty
     var timer : Timer!
     var timer_value = 0
+    let timeLabel = SKLabelNode()//TODO: change timer value to time
+
     
     //array of asteroids
     let asteroids : NSMutableArray = NSMutableArray()
@@ -139,6 +142,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bg.size = CGSize(width: view!.frame.width, height:( view?.frame.height)!)
         bg.position = CGPoint(x: (view?.frame.width)!/2, y: view!.frame.height/2)
         
+        //time
+        timeLabel.text = "time: \(timer_value)"
+        timeLabel.position.x = self.frame.width * 0.8
+        timeLabel.position.y = self.frame.height * 0.1 //time label on bottom of screen
+        timeLabel.fontColor = UIColor.white
+        
         //pause button
         pauseButton.frame = CGRect(x: (scene?.frame.width)! - (scene?.frame.width)! * 0.075, y: view!.frame.height - (view?.frame.height)! * 0.15, width: view!.frame.height * 0.08, height: view!.frame.height * 0.08)
         
@@ -152,7 +161,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pauseButton.addTarget(self, action: #selector(GameScene.pauseButtonPressed), for: UIControlEvents.touchUpInside)
         pauseButton.setTitleColor(UIColor.black, for: UIControlState())
         
-        
+        //add a replay button
         replayButton.frame = CGRect(x: (scene?.frame.width)! - (scene?.frame.width)! * 0.075, y: view!.frame.height - (view?.frame.height)! * 0.25, width: view!.frame.height * 0.08, height: view!.frame.height * 0.08)
         replayButton.layer.cornerRadius = 0.5 * replayButton.bounds.size.width
         replayButton.backgroundColor = UIColor.white
@@ -160,8 +169,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         replayButton.setTitleColor(UIColor.black, for: UIControlState())
         replayButton.addTarget(self, action: #selector(self.reset), for: .touchUpInside)
         replayButton.tintColor = UIColor.clear
-
-
         
         //create and position the player right above the ground
         player = ESSpaceship()
@@ -176,8 +183,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         movingGround.position = CGPoint(x: 0, y: 0)
         movingCieling.position = CGPoint(x: 0, y: view!.frame.height - movingCieling.frame.height)
         
-        //TODO: asteroid
-        //asteroid = JSAsteroid(scene: self, position: CGPoint(x: (scene?.frame.width)! * 0.9, y: (scene?.frame.height)! * 0.7))
         asteroids.add(JSAsteroid(scene: self, position: CGPoint(x: (scene?.frame.width)! + (scene?.frame.width)! * 0.1/*asteriod width*/, y: (scene?.frame.height)! * 0.7)))
         //physics
         addPhysicsToWorld()
@@ -192,6 +197,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //add the objects to the scene
         addChild(bg) //set to first so it is in the back of the view
         addChild(movingGround)
+        addChild(timeLabel)
         addChild(label)
         addChild(player)
         addChild(movingCieling)
@@ -223,7 +229,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }//if
         if counter > 1 {
             player.physicsBody?.velocity = CGVector(dx: 0.0, dy: 0.0)
-            player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 15))
+            player.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 12.5))
         }//if
     }//touches began function
     
@@ -317,6 +323,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //only increments the timer when the game is not paused and the player is not hit
         if(!pause && !isHit) {
             timer_value += 1
+            timeLabel.text = "time: \(timer_value)"
             if(timer_value == 5) {
                 asteroids.add(JSAsteroid(scene: self, position: CGPoint(x: (scene?.frame.width)! + (scene?.frame.width)! * 0.1/*asteriod width*/, y: (scene?.frame.height)! * 0.3)))
                 addChild((asteroids[1] as! JSAsteroid))
