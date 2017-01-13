@@ -23,24 +23,19 @@ class JSAsteroid: SKSpriteNode {
         physicsBody?.affectedByGravity = false
         physicsBody?.categoryBitMask = 0x1 << 1
         physicsBody?.contactTestBitMask = 0x1 << 0
-        
-        
-        moveLeft = SKAction.moveBy(x: -1.2 * scene.frame.width, y:0, duration:xSpeed)
+        //instiantiate moveLeft SKAction object
     }
     
     func move() {
-        print("asteroid moved")
-        //self.physicsBody?.applyImpulse(CGVector.init(dx: xSpeed, dy: 0.0))
+        moveLeft = SKAction.moveBy(x: -1.5 * (scene?.frame.width)!, y:0, duration:xSpeed)
         self.run(moveLeft)
     }
     
     func stop() {
         self.removeAllActions()
-        
     }
     
     func resume() {
-        //TODO: implement
         self.move()
     }
     

@@ -73,4 +73,4 @@ class JSMovingGround: SKSpriteNode
 }//class
 
 
-//TODO: fix some of the wierd things going on with the ground/cieling running out when pausing the game
+//TODO: fix some of the wierd things going on with the ground/ceiling running out when pausing the game

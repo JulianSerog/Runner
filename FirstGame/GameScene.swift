@@ -11,8 +11,9 @@ import AVFoundation
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
-    var movingGround: JSMovingGround!
-    var movingCieling: JSMovingGround!
+    //class/scene variables
+    var ground: JSMovingGround!
+    var ceiling: JSMovingGround!
     var player: ESSpaceship!
     var backgroundMusicPlayer : AVAudioPlayer!
     var PLAYER_STARTING_POINT : CGPoint!
@@ -23,11 +24,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var bg : SKSpriteNode!
     var pause = false
     
+    //TODO: create a label for high scores - use realm to save high score
+    
     let pauseImage = UIImage(named: "pause.png")
     let replayImage = UIImage(named: "reset.png")
     let playImage = UIImage(named: "play.png")
-    
-    
     
     //timer for keeping score & increasing difficulty
     var timer : Timer!
@@ -47,23 +48,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //counter for num of touches
     var counter = 0
     
-    
-    
     //START SCENE
     override func didMove(to view: SKView) {
-        
         //play background music
         playBackgroundMusic("bg_music.mp3")
-        backgroundColor = UIColor.clear //TODO: maybe add an image to the background to give it a space feel
-        
-        
         
         //MARK: setup world physics
         physicsWorld.contactDelegate = self
         addElementsAndUI()
     }//didMoveToView
-    
-    
     
     //gameSceneDidView above
     //==========================================================================================================================================//
@@ -94,7 +87,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         backgroundMusicPlayer.play()
     }//playBackgroundMusic
     
-    
     //TODO: finish this method
     func reset() {
         backgroundMusicPlayer.stop()
@@ -111,18 +103,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //add physics to world
         self.physicsWorld.gravity = CGVector(dx: 0, dy: -3.5)
         //addphysics to moving ground
-        movingGround.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: view!.frame.width, height: movingGround.size.height * 2))
-        movingGround.physicsBody?.isDynamic = false
-        movingCieling.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: view!.frame.width, height: movingCieling.size.height/2))
-        movingCieling.physicsBody?.isDynamic = false
+        ground.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: view!.frame.width, height: ground.size.height * 2))
+        ground.physicsBody?.isDynamic = false
+        ceiling.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: view!.frame.width, height: ceiling.size.height/2))
+        ceiling.physicsBody?.isDynamic = false
         
-        //add physics to ground and cieling
+        //add physics to ground and ceiling
         //physics setup
         //TODO: find out why this doesn't work in class
-        movingGround.physicsBody?.categoryBitMask = 0x1 << 1
-        movingGround.physicsBody?.contactTestBitMask = 0x1 << 0
-        movingCieling.physicsBody?.categoryBitMask = 0x1 << 1
-        movingCieling.physicsBody?.contactTestBitMask = 0x1 << 0
+        ground.physicsBody?.categoryBitMask = 0x1 << 1
+        ground.physicsBody?.contactTestBitMask = 0x1 << 0
+        ceiling.physicsBody?.categoryBitMask = 0x1 << 1
+        ceiling.physicsBody?.contactTestBitMask = 0x1 << 0
     }//addPhysicsToWorld
     
 
@@ -143,18 +135,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bg.position = CGPoint(x: (view?.frame.width)!/2, y: view!.frame.height/2)
         
         //time
-        timeLabel.text = "time: \(timer_value)"
-        timeLabel.position.x = self.frame.width * 0.8
-        timeLabel.position.y = self.frame.height * 0.1 //time label on bottom of screen
-        timeLabel.fontColor = UIColor.white
+        timeLabel.text = "score: \(calculateTime(time: timer_value))"
+        timeLabel.position.x = self.frame.width * 0.8 //time label on right side of screen
+        timeLabel.position.y = self.frame.height * 0.08 //time label on bottom of screen
+        timeLabel.fontSize = 24.0   //adjust font size
+        timeLabel.fontColor = UIColor.white //make font color white to see on background
         
         //pause button
         pauseButton.frame = CGRect(x: (scene?.frame.width)! - (scene?.frame.width)! * 0.075, y: view!.frame.height - (view?.frame.height)! * 0.15, width: view!.frame.height * 0.08, height: view!.frame.height * 0.08)
-        
         //make button circular
         pauseButton.layer.cornerRadius = 0.5 * pauseButton.bounds.size.width
         pauseButton.clipsToBounds = true
-        
         pauseButton.backgroundColor = UIColor.white
         pauseButton.setBackgroundImage(pauseImage, for: .normal)
         pauseButton.tintColor = UIColor.clear
@@ -176,15 +167,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         PLAYER_STARTING_POINT = player.position
         
         //ground and ceiling
-        movingGround = JSMovingGround(size: CGSize(width: view!.frame.width, height: 20))
-        movingCieling = JSMovingGround(size: CGSize(width: view!.frame.width, height: view!.frame.height/15))
+        ground = JSMovingGround(size: CGSize(width: view!.frame.width, height: 20))
+        ceiling = JSMovingGround(size: CGSize(width: view!.frame.width, height: view!.frame.height/15))
         
         //set the position of the ground
-        movingGround.position = CGPoint(x: 0, y: 0)
-        movingCieling.position = CGPoint(x: 0, y: view!.frame.height - movingCieling.frame.height)
+        ground.position = CGPoint(x: 0, y: 0)
+        ceiling.position = CGPoint(x: 0, y: view!.frame.height - ceiling.frame.height)
         
-        asteroids.add(JSAsteroid(scene: self, position: CGPoint(x: (scene?.frame.width)! + (scene?.frame.width)! * 0.1/*asteriod width*/, y: (scene?.frame.height)! * 0.7)))
-        //physics
+        asteroids.add(JSAsteroid(scene: self, position: CGPoint(x: (scene?.frame.width)! + (scene?.frame.width)! * 0.1/*asteriod width*/, y: (scene?.frame.height)! * 0.8)))
+        
+        //add physics
         addPhysicsToWorld()
         
         //label
@@ -196,11 +188,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         //add the objects to the scene
         addChild(bg) //set to first so it is in the back of the view
-        addChild(movingGround)
+        addChild(ground)
         addChild(timeLabel)
         addChild(label)
         addChild(player)
-        addChild(movingCieling)
+        addChild(ceiling)
         addChild(asteroids[0] as! SKNode)
         view!.addSubview(pauseButton)
     }//addElementsAndUI
@@ -215,7 +207,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if counter == 1 {
             timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(GameScene.incrementTime), userInfo: nil, repeats: true)
             
-            print("timer: \(timer)")
+            //print("timer: \(timer)")
             
             //adding the physics body here makes it so that the player doesn't automatically drop when the view starts
             player.physicsBody = SKPhysicsBody(texture: player.texture!, size: player.size)
@@ -237,14 +229,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //MARK: update
     override func update(_ currentTime: TimeInterval) {
         /* Called before each frame is rendered */
-        //print("current time: \(timer_value)")
-        /*
-        if currentTime > 3000 {
-            asteroids.add(JSAsteroid(scene: self, position: CGPoint(x: (scene?.frame.width)! * 0.9, y: (scene?.frame.height)! * 0.3)))
-            addChild((asteroids[1] as! JSAsteroid))
-            (asteroids[1] as! JSAsteroid).move()
-        }
-        */
+        
         for asteroid in asteroids {
             (asteroid as! JSAsteroid).resetPos(scene: self)
         }
@@ -272,15 +257,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             addChild(failureLabel)
             failureLabel.run(blinkAnimation()) //runs the blink animation forever
             
-            let restart = SKNode() //TODO: change restart button to node
-            
-            
-            
-            //halt all asteriods
+            //halt all asteroids
             for asteriod in asteroids {
                 (asteriod as! JSAsteroid).stop()
             }
-            
         }//if
     }//didBeginContact
     
@@ -290,7 +270,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func pauseButtonPressed() {
         if (pause == false && isHit == false) {
             pause = true
-            print(physicsWorld.speed) //to find current speed
+            //print(physicsWorld.speed) //to find current speed
             physicsWorld.speed = 0.0
             //performSegueWithIdentifier("toMainMenu", sender: self) //not available in SKScene
             pauseButton.setBackgroundImage(playImage, for: .normal)
@@ -300,7 +280,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 (asteriod as! JSAsteroid).stop()
             }
             
-            print("entered pause, pause var is now:   \(pause)")
+            //print("entered pause, pause var is now:   \(pause)")
         } else if (pause == true && isHit == false) {
             pause = false
             
@@ -312,7 +292,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             pauseButton.setBackgroundImage(pauseImage, for: .normal)
             physicsWorld.speed = 1.0 //resumes game
         } else if (pause == false && isHit == true) {
-            print("button pressed and is hit is true")
+            //print("button pressed and is hit is true")
             //causes error
             //self.view!.window!.rootViewController!.performSegueWithIdentifier("toMainMenu", sender: self)
         }
@@ -322,13 +302,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func incrementTime() {
         //only increments the timer when the game is not paused and the player is not hit
         if(!pause && !isHit) {
+            raiseDifficulty()
             timer_value += 1
-            timeLabel.text = "time: \(timer_value)"
+            timeLabel.text = "score: \(calculateTime(time: timer_value))"
             if(timer_value == 5) {
-                asteroids.add(JSAsteroid(scene: self, position: CGPoint(x: (scene?.frame.width)! + (scene?.frame.width)! * 0.1/*asteriod width*/, y: (scene?.frame.height)! * 0.3)))
+                asteroids.add(JSAsteroid(scene: self, position: CGPoint(x: (scene?.frame.width)! + (scene?.frame.width)! * 0.1/*asteriod width*/, y: (scene?.frame.height)! * 0.23)))
                 addChild((asteroids[1] as! JSAsteroid))
                 (asteroids[1] as! JSAsteroid).move()
-            } else if (timer_value == 10) {
+            } else if (timer_value == 7) {
                 asteroids.add(JSAsteroid(scene: self, position: CGPoint(x: (scene?.frame.width)! + (scene?.frame.width)! * 0.1/*asteriod width*/, y: (scene?.frame.height)! * 0.5)))
                 addChild((asteroids[2] as! JSAsteroid))
                 (asteroids[2] as! JSAsteroid).move()
@@ -336,6 +317,46 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }//if not pause
     }//incrementTime
     
+    func raiseDifficulty() {
+        if (timer_value == 20) {
+            //increment speed
+            for asteroid in asteroids {
+                (asteroid as! JSAsteroid).xSpeed -= 2
+            }
+        } else if (timer_value == 40) {
+            for asteroid in asteroids {
+                (asteroid as! JSAsteroid).xSpeed -= 2
+            }
+        } else if (timer_value == 60) {
+            for asteroid in asteroids {
+                (asteroid as! JSAsteroid).xSpeed -= 2
+            }
+        }
+    }//raise diffuculty
+    
+    func calculateTime(time: Int) -> String {
+        let min = time / 60
+        let sec = time % 60
+        var minString: String
+        var secString: String
+        
+        //format sub strings
+        if(sec < 10) {
+            secString = "0\(sec)"
+        } else {
+            secString = String(sec)
+        }
+        
+        if(min < 10) {
+            minString = "0\(min)"
+        } else {
+            minString = String(min)
+        }
+        
+        
+        let s = "\(minString):\(secString)"
+        return s
+    }
     
 }//class
 
