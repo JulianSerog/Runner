@@ -13,7 +13,7 @@ class JSMainMenuViewController: UIViewController {
     
     //create variables and constants
     let startButton = UIButton(type: UIButtonType.custom) //make custom instead of system because button will be blue
-    let logo = UIImageView(image: UIImage(named: "game-logo.png"))
+    let logo = UIImageView(image: UIImage(named: "logo.png"))
     let backgroundImage = UIImageView()
     let buttonImage = UIImage(named: "start.png")
     //var isStarted: Bool = false
@@ -64,7 +64,7 @@ class JSMainMenuViewController: UIViewController {
         // 2)Game Title
         //titleLabel.text = "Star Racer"
         
-        logo.frame = CGRect(x: view.frame.width * 0.2, y: view.frame.height * 0.2, width: view.frame.width * 0.6, height: view.frame.height * 0.1)
+        logo.frame = CGRect(x: view.frame.width * 0.2, y: view.frame.height * 0.3, width: view.frame.width * 0.6, height: view.frame.height * 0.1)
 
         
         // 3)start button

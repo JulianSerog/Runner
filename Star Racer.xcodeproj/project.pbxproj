@@ -14,6 +14,7 @@
 		9E70F7541BD5DDE90017F92B /* JSMainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E70F7531BD5DDE90017F92B /* JSMainMenuViewController.swift */; };
 		9E7B0F5D1C27BADE0070FAF3 /* JSSpaceship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7B0F5C1C27BADE0070FAF3 /* JSSpaceship.swift */; };
 		9E7B0F5F1C27BBEE0070FAF3 /* speedship.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E7B0F5E1C27BBEE0070FAF3 /* speedship.png */; };
+		9E7FD60A1E2BF58000A28F02 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E7FD6091E2BF58000A28F02 /* logo.png */; };
 		9E8AB4681B1E8F5300DFF844 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8AB4671B1E8F5300DFF844 /* AppDelegate.swift */; };
 		9E8AB46A1B1E8F5300DFF844 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9E8AB4691B1E8F5300DFF844 /* GameScene.sks */; };
 		9E8AB46C1B1E8F5300DFF844 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8AB46B1B1E8F5300DFF844 /* GameScene.swift */; };
@@ -53,6 +54,7 @@
 		9E70F7531BD5DDE90017F92B /* JSMainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSMainMenuViewController.swift; sourceTree = "<group>"; };
 		9E7B0F5C1C27BADE0070FAF3 /* JSSpaceship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSSpaceship.swift; sourceTree = "<group>"; };
 		9E7B0F5E1C27BBEE0070FAF3 /* speedship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = speedship.png; sourceTree = "<group>"; };
+		9E7FD6091E2BF58000A28F02 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		9E8AB4621B1E8F5200DFF844 /* Star Racer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Star Racer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E8AB4661B1E8F5200DFF844 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E8AB4671B1E8F5300DFF844 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				9EDB40981E22CBD80007131F /* pause.png */,
 				9ECFCE1A1D8903F500551AA4 /* ground.png */,
 				9E2802011D888D5F003E2976 /* asteroid.png */,
+				9E7FD6091E2BF58000A28F02 /* logo.png */,
 				9EFD19E11C2A050B00BEEECC /* start.png */,
 				9E7B0F5E1C27BBEE0070FAF3 /* speedship.png */,
 			);
@@ -276,6 +279,7 @@
 			files = (
 				9ECFCE1B1D8903F500551AA4 /* ground.png in Resources */,
 				9EC16DA21E2B5DFF00FAD2AE /* game-bg2.png in Resources */,
+				9E7FD60A1E2BF58000A28F02 /* logo.png in Resources */,
 				9EC16DA61E2B6A3A00FAD2AE /* game-logo.png in Resources */,
 				9E8AB4761B1E8F5300DFF844 /* LaunchScreen.xib in Resources */,
 				9EC16D9A1E2B5DDC00FAD2AE /* game_over.mp3 in Resources */,
@@ -454,7 +458,7 @@
 				DEVELOPMENT_TEAM = 5SA77TVD64;
 				INFOPLIST_FILE = FirstGame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.SerogDev.StarRacer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SerogDev.SpaceRacer;
 				PRODUCT_NAME = "Star Racer";
 				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;
@@ -471,7 +475,7 @@
 				DEVELOPMENT_TEAM = 5SA77TVD64;
 				INFOPLIST_FILE = FirstGame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.SerogDev.StarRacer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SerogDev.SpaceRacer;
 				PRODUCT_NAME = "Star Racer";
 				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;
