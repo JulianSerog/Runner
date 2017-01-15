@@ -23,13 +23,15 @@
 		9E8AB4761B1E8F5300DFF844 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9E8AB4741B1E8F5300DFF844 /* LaunchScreen.xib */; };
 		9E8AB4821B1E8F5300DFF844 /* FirstGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8AB4811B1E8F5300DFF844 /* FirstGameTests.swift */; };
 		9E8AB4981B1EA12900DFF844 /* JSMovingGround.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8AB4971B1EA12900DFF844 /* JSMovingGround.swift */; };
-		9E8BE49B1B5F01DD00FCA156 /* bg_music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9E8BE49A1B5F01DD00FCA156 /* bg_music.mp3 */; };
-		9E8BE49D1B5F05E500FCA156 /* game_over.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9E8BE49C1B5F05E400FCA156 /* game_over.mp3 */; };
+		9EC16D9A1E2B5DDC00FAD2AE /* game_over.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9EC16D991E2B5DDC00FAD2AE /* game_over.mp3 */; };
+		9EC16D9C1E2B5DEF00FAD2AE /* game-bg.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9EC16D9B1E2B5DEF00FAD2AE /* game-bg.mp3 */; };
+		9EC16D9E1E2B5DF700FAD2AE /* Game-Menu.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9EC16D9D1E2B5DF700FAD2AE /* Game-Menu.mp3 */; };
+		9EC16DA11E2B5DFF00FAD2AE /* game-bg1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EC16D9F1E2B5DFF00FAD2AE /* game-bg1.png */; };
+		9EC16DA21E2B5DFF00FAD2AE /* game-bg2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EC16DA01E2B5DFF00FAD2AE /* game-bg2.png */; };
+		9EC16DA61E2B6A3A00FAD2AE /* game-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EC16DA51E2B6A3A00FAD2AE /* game-logo.png */; };
 		9ECFCE1B1D8903F500551AA4 /* ground.png in Resources */ = {isa = PBXBuildFile; fileRef = 9ECFCE1A1D8903F500551AA4 /* ground.png */; };
 		9EDB40991E22CBD80007131F /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EDB40971E22CBD80007131F /* play.png */; };
 		9EDB409A1E22CBD80007131F /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EDB40981E22CBD80007131F /* pause.png */; };
-		9EF001891C29200600C1361F /* game_bg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9EF001881C29200600C1361F /* game_bg.jpg */; };
-		9EF0018B1C29201500C1361F /* space.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9EF0018A1C29201500C1361F /* space.jpg */; };
 		9EFD19E21C2A050B00BEEECC /* start.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EFD19E11C2A050B00BEEECC /* start.png */; };
 /* End PBXBuildFile section */
 
@@ -64,13 +66,15 @@
 		9E8AB4801B1E8F5300DFF844 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E8AB4811B1E8F5300DFF844 /* FirstGameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstGameTests.swift; sourceTree = "<group>"; };
 		9E8AB4971B1EA12900DFF844 /* JSMovingGround.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSMovingGround.swift; sourceTree = "<group>"; };
-		9E8BE49A1B5F01DD00FCA156 /* bg_music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bg_music.mp3; sourceTree = "<group>"; };
-		9E8BE49C1B5F05E400FCA156 /* game_over.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = game_over.mp3; sourceTree = "<group>"; };
+		9EC16D991E2B5DDC00FAD2AE /* game_over.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = game_over.mp3; sourceTree = "<group>"; };
+		9EC16D9B1E2B5DEF00FAD2AE /* game-bg.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "game-bg.mp3"; sourceTree = "<group>"; };
+		9EC16D9D1E2B5DF700FAD2AE /* Game-Menu.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Game-Menu.mp3"; sourceTree = "<group>"; };
+		9EC16D9F1E2B5DFF00FAD2AE /* game-bg1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "game-bg1.png"; sourceTree = "<group>"; };
+		9EC16DA01E2B5DFF00FAD2AE /* game-bg2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "game-bg2.png"; sourceTree = "<group>"; };
+		9EC16DA51E2B6A3A00FAD2AE /* game-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "game-logo.png"; sourceTree = "<group>"; };
 		9ECFCE1A1D8903F500551AA4 /* ground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ground.png; sourceTree = "<group>"; };
 		9EDB40971E22CBD80007131F /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
 		9EDB40981E22CBD80007131F /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
-		9EF001881C29200600C1361F /* game_bg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = game_bg.jpg; sourceTree = "<group>"; };
-		9EF0018A1C29201500C1361F /* space.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = space.jpg; sourceTree = "<group>"; };
 		9EFD19E11C2A050B00BEEECC /* start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = start.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -95,8 +99,9 @@
 		9E2380FE1D8853BB00F4BBF5 /* music */ = {
 			isa = PBXGroup;
 			children = (
-				9E8BE49A1B5F01DD00FCA156 /* bg_music.mp3 */,
-				9E8BE49C1B5F05E400FCA156 /* game_over.mp3 */,
+				9EC16D9B1E2B5DEF00FAD2AE /* game-bg.mp3 */,
+				9EC16D9D1E2B5DF700FAD2AE /* Game-Menu.mp3 */,
+				9EC16D991E2B5DDC00FAD2AE /* game_over.mp3 */,
 			);
 			name = music;
 			sourceTree = "<group>";
@@ -169,15 +174,16 @@
 		9E8AB48B1B1E917200DFF844 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				9EC16D9F1E2B5DFF00FAD2AE /* game-bg1.png */,
+				9EC16DA01E2B5DFF00FAD2AE /* game-bg2.png */,
 				9EDB40971E22CBD80007131F /* play.png */,
+				9EC16DA51E2B6A3A00FAD2AE /* game-logo.png */,
 				9E4F3F041E26FFD2008F1004 /* reset.png */,
 				9EDB40981E22CBD80007131F /* pause.png */,
 				9ECFCE1A1D8903F500551AA4 /* ground.png */,
 				9E2802011D888D5F003E2976 /* asteroid.png */,
 				9EFD19E11C2A050B00BEEECC /* start.png */,
 				9E7B0F5E1C27BBEE0070FAF3 /* speedship.png */,
-				9EF0018A1C29201500C1361F /* space.jpg */,
-				9EF001881C29200600C1361F /* game_bg.jpg */,
 			);
 			name = img;
 			sourceTree = "<group>";
@@ -233,7 +239,7 @@
 				TargetAttributes = {
 					9E8AB4611B1E8F5200DFF844 = {
 						CreatedOnToolsVersion = 6.3.2;
-						DevelopmentTeam = KX2F6DCESX;
+						DevelopmentTeam = 5SA77TVD64;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
@@ -269,17 +275,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				9ECFCE1B1D8903F500551AA4 /* ground.png in Resources */,
+				9EC16DA21E2B5DFF00FAD2AE /* game-bg2.png in Resources */,
+				9EC16DA61E2B6A3A00FAD2AE /* game-logo.png in Resources */,
 				9E8AB4761B1E8F5300DFF844 /* LaunchScreen.xib in Resources */,
-				9E8BE49B1B5F01DD00FCA156 /* bg_music.mp3 in Resources */,
-				9EF0018B1C29201500C1361F /* space.jpg in Resources */,
-				9EF001891C29200600C1361F /* game_bg.jpg in Resources */,
+				9EC16D9A1E2B5DDC00FAD2AE /* game_over.mp3 in Resources */,
 				9E2802021D888D5F003E2976 /* asteroid.png in Resources */,
+				9EC16D9C1E2B5DEF00FAD2AE /* game-bg.mp3 in Resources */,
+				9EC16D9E1E2B5DF700FAD2AE /* Game-Menu.mp3 in Resources */,
 				9EFD19E21C2A050B00BEEECC /* start.png in Resources */,
 				9E8AB4731B1E8F5300DFF844 /* Images.xcassets in Resources */,
-				9E8BE49D1B5F05E500FCA156 /* game_over.mp3 in Resources */,
 				9E7B0F5F1C27BBEE0070FAF3 /* speedship.png in Resources */,
 				9EDB409A1E22CBD80007131F /* pause.png in Resources */,
 				9E8AB46A1B1E8F5300DFF844 /* GameScene.sks in Resources */,
+				9EC16DA11E2B5DFF00FAD2AE /* game-bg1.png in Resources */,
 				9EDB40991E22CBD80007131F /* play.png in Resources */,
 				9E8AB4711B1E8F5300DFF844 /* Main.storyboard in Resources */,
 				9E4F3F051E26FFD2008F1004 /* reset.png in Resources */,
@@ -443,10 +451,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = KX2F6DCESX;
+				DEVELOPMENT_TEAM = 5SA77TVD64;
 				INFOPLIST_FILE = FirstGame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.esaSerog.StarRacer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SerogDev.StarRacer;
 				PRODUCT_NAME = "Star Racer";
 				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;
@@ -460,10 +468,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = KX2F6DCESX;
+				DEVELOPMENT_TEAM = 5SA77TVD64;
 				INFOPLIST_FILE = FirstGame/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.esaSerog.StarRacer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.SerogDev.StarRacer;
 				PRODUCT_NAME = "Star Racer";
 				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;

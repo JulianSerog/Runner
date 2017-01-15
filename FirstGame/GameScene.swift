@@ -24,7 +24,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var bg : SKSpriteNode!
     var pause = false
     
+    //NSUserDefaults for storage
+    let defaults = UserDefaults.standard
+    
     //TODO: create a label for high scores - use realm to save high score
+    let highScoreLbl: SKLabelNode = SKLabelNode()
     
     let pauseImage = UIImage(named: "pause.png")
     let replayImage = UIImage(named: "reset.png")
@@ -51,7 +55,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //START SCENE
     override func didMove(to view: SKView) {
         //play background music
-        playBackgroundMusic("bg_music.mp3")
+        playBackgroundMusic("game-bg.mp3")
         
         //MARK: setup world physics
         physicsWorld.contactDelegate = self
@@ -130,16 +134,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // add elements and set up game
     func addElementsAndUI() {
         //add background -- background added through sprite
-        bg = SKSpriteNode(imageNamed: "game_bg.jpg")
+        bg = SKSpriteNode(imageNamed: "game-bg1.png")
         bg.size = CGSize(width: view!.frame.width, height:( view?.frame.height)!)
         bg.position = CGPoint(x: (view?.frame.width)!/2, y: view!.frame.height/2)
         
         //time
-        timeLabel.text = "score: \(calculateTime(time: timer_value))"
+        timeLabel.text = "Score: \(calculateTime(time: timer_value))"
         timeLabel.position.x = self.frame.width * 0.8 //time label on right side of screen
         timeLabel.position.y = self.frame.height * 0.08 //time label on bottom of screen
         timeLabel.fontSize = 24.0   //adjust font size
         timeLabel.fontColor = UIColor.white //make font color white to see on background
+        
+        //high score
+        highScoreLbl.text = "High Score: "
+        highScoreLbl.position.y = self.frame.height * 0.08 //time label on bottom of screen
+        highScoreLbl.position.x = self.frame.width * 0.15
+        highScoreLbl.fontSize = 20.0   //adjust font size
+        highScoreLbl.fontColor = UIColor.white //make font color white to see on background
+        highScoreLbl.text = "High Score: \(calculateTime(time: getHighScore()))"
+
         
         //pause button
         pauseButton.frame = CGRect(x: (scene?.frame.width)! - (scene?.frame.width)! * 0.075, y: view!.frame.height - (view?.frame.height)! * 0.15, width: view!.frame.height * 0.08, height: view!.frame.height * 0.08)
@@ -189,6 +202,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //add the objects to the scene
         addChild(bg) //set to first so it is in the back of the view
         addChild(ground)
+        addChild(highScoreLbl)
         addChild(timeLabel)
         addChild(label)
         addChild(player)
@@ -241,6 +255,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if isHit != true {
             isHit = true
             
+            //save high score if it is higher than current score
+            if(timer_value > getHighScore()) {
+                saveHighScore()
+            }
+            
             backgroundMusicPlayer.stop()
             playBackgroundMusic("game_over.mp3")
             //show replay button
@@ -268,7 +287,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     //TODO: find out why segue isn't performing
     //MARK: pause button pressed
     func pauseButtonPressed() {
-        if (pause == false && isHit == false) {
+        if (pause == false && isHit == false && counter > 0) {
             pause = true
             //print(physicsWorld.speed) //to find current speed
             physicsWorld.speed = 0.0
@@ -304,7 +323,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if(!pause && !isHit) {
             raiseDifficulty()
             timer_value += 1
-            timeLabel.text = "score: \(calculateTime(time: timer_value))"
+            timeLabel.text = "Score: \(calculateTime(time: timer_value))"
             if(timer_value == 5) {
                 asteroids.add(JSAsteroid(scene: self, position: CGPoint(x: (scene?.frame.width)! + (scene?.frame.width)! * 0.1/*asteriod width*/, y: (scene?.frame.height)! * 0.23)))
                 addChild((asteroids[1] as! JSAsteroid))
@@ -331,7 +350,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             for asteroid in asteroids {
                 (asteroid as! JSAsteroid).xSpeed -= 2
             }
+        } else if (timer_value == 80) {
+            for asteroid in asteroids {
+                (asteroid as! JSAsteroid).xSpeed -= 2
+            }
         }
+
     }//raise diffuculty
     
     func calculateTime(time: Int) -> String {
@@ -356,6 +380,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let s = "\(minString):\(secString)"
         return s
+    }
+    
+    func saveHighScore() {
+        let dictionary = ["highScore" : timer_value]
+        defaults.set(dictionary, forKey: "StarRacer")
+    }
+    
+    func getHighScore() -> Int {
+        if defaults.object(forKey: "StarRacer") == nil {
+            defaults.set(["highScore":0], forKey: "StarRacer")
+            
+        }
+        let highScoreDict: NSDictionary = defaults.object(forKey: "StarRacer") as! NSDictionary
+        let highScore: Int = highScoreDict.object(forKey: "highScore") as! Int
+        return highScore 
     }
     
 }//class
