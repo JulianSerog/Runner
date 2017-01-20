@@ -354,6 +354,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             for asteroid in asteroids {
                 (asteroid as! JSAsteroid).xSpeed -= 2
             }
+        } else if (timer_value == 100) {
+            for asteroid in asteroids {
+                (asteroid as! JSAsteroid).xSpeed -= 2
+            }
         }
 
     }//raise diffuculty
