@@ -96,7 +96,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         backgroundMusicPlayer.stop()
         replayButton.isHidden = true
         let gameScene = GameScene(size: self.size)
-        let transition = SKTransition.doorsCloseHorizontal(withDuration: 0.5)
+        let transition = SKTransition.flipHorizontal(withDuration: 0.5)
         gameScene.scaleMode = SKSceneScaleMode.aspectFill
         self.scene!.view?.presentScene(gameScene, transition: transition)
     }//reset
